@@ -35,7 +35,7 @@ export const RegisterModal = () => {
 
     axios
       .post("/api/register", data)
-      .then((response) => {
+      .then(() => {
         registerModal.onClose();
       })
       .catch((error) => {
