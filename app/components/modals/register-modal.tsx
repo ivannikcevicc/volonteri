@@ -13,6 +13,7 @@ import { Heading } from "../heading";
 import { Input } from "../inputs/input";
 import toast from "react-hot-toast";
 import { Button } from "../button";
+import { signIn } from "next-auth/react";
 
 export const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -81,13 +82,13 @@ export const RegisterModal = () => {
       <Button
         outline
         label="Continue with Google"
-        onClick={() => {}}
+        onClick={() => signIn("google")}
         icon={FcGoogle}
       ></Button>
       <Button
         outline
         label="Continue with Github"
-        onClick={() => {}}
+        onClick={() => signIn("github")}
         icon={AiFillGithub}
       ></Button>
       <div className="text-neutral-600 text-center mt-4 font-light">
