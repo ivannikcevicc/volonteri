@@ -85,6 +85,7 @@ export const Modal: React.FC<Modal> = ({
                     <Button
                       disabled={disabled}
                       label={secondaryActionLabel}
+                      outline={true}
                       onClick={handleSecondaryAction}
                     />
                   )}
