@@ -10,7 +10,7 @@ interface Props {
   label: string;
   type?: string;
   disabled?: boolean;
-  formatPrice?: string;
+  formatPrice?: boolean;
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
