@@ -4,19 +4,14 @@ import Container from "@/app/components/container";
 import { ListingHead } from "@/app/components/listings/ListingHead";
 import { ListingInfo } from "@/app/components/listings/ListingInfo";
 import { ListingReservation } from "@/app/components/listings/ListingReservation";
-import { LoginModal } from "@/app/components/modals/login-modal";
 import { categories } from "@/app/components/navbar/Categories";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
-import { SafeListing, SafeUser } from "@/app/types";
-import { Reservation } from "@prisma/client";
+import { SafeListing, SafeUser, SafeReservation } from "@/app/types";
 import axios from "axios";
-import {
-  differenceInCalendarDays,
-  differenceInDays,
-  eachDayOfInterval,
-} from "date-fns";
+import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Range } from "react-date-range";
 import toast from "react-hot-toast";
 
 const initialDateRange = {
@@ -26,7 +21,7 @@ const initialDateRange = {
 };
 
 interface Props {
-  reservations?: Reservation[];
+  reservations?: SafeReservation[];
   listing: SafeListing & {
     user: SafeUser;
   };
@@ -58,7 +53,7 @@ export const ListingClient = ({
 
   const [isLoading, setIsLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(listing.price);
-  const [dateRange, setDateRange] = useState(initialDateRange);
+  const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
   const onCreateReservation = useCallback(() => {
     if (!currentUser) return loginModal.onOpen();
@@ -89,8 +84,10 @@ export const ListingClient = ({
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
       const dayCount = differenceInCalendarDays(
-        dateRange.startDate,
-        dateRange.endDate
+        // dateRange.startDate,
+        // dateRange.endDate
+        dateRange.endDate,
+        dateRange.startDate
       );
 
       if (dayCount && listing.price) {
