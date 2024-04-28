@@ -8,7 +8,10 @@ export const Logo = () => {
   const router = useRouter();
   return (
     <Image
-      onClick={() => router.push("/")}
+      onClick={() => {
+        router.push("/");
+        router.refresh();
+      }}
       alt="Logo Airbnb"
       className="hidden md:block cursor-pointer"
       height={"100"}
