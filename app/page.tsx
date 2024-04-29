@@ -3,6 +3,8 @@ import getListings, { ListingProps } from "./actions/getListings";
 import { EmptyState } from "./components/EmptyState";
 import Container from "./components/container";
 import { ListingCard } from "./components/listings/ListingCard";
+export const dynamic = "force-dynamic";
+
 interface Props {
   searchParams: ListingProps;
 }
