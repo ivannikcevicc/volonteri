@@ -4,7 +4,7 @@ import useCountries from "@/app/hooks/useCountries";
 import useSearchModal from "@/app/hooks/useSearchModal copy";
 import { differenceInDays, startOfDay } from "date-fns";
 import { useSearchParams } from "next/navigation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { BiSearch } from "react-icons/bi";
 
 export const Search = () => {
