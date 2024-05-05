@@ -30,6 +30,7 @@ export const UserMenu = ({ currentUser }: Props) => {
   const onRent = useCallback(() => {
     if (!currentUser) {
       loginModal.onOpen();
+      return;
     }
 
     rentModal.onOpen();
@@ -71,7 +72,10 @@ export const UserMenu = ({ currentUser }: Props) => {
                   onClick={() => router.push("/reservations")}
                   label="My reservations"
                 />
-                <MenuItem onClick={() => router.push("/properties")} label="My properties" />
+                <MenuItem
+                  onClick={() => router.push("/properties")}
+                  label="My properties"
+                />
                 <MenuItem onClick={rentModal.onOpen} label="Airbnb my home" />
                 <hr />
                 <MenuItem onClick={() => signOut()} label="Log out" />
