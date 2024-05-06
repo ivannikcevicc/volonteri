@@ -36,15 +36,8 @@ export const Search = () => {
 
       return `${diff} days`;
     }
-    return "Any week";
+    return "Anytime";
   }, [startDate, endDate]);
-
-  const guestLabel = useMemo(() => {
-    if (guestCount) {
-      return `${guestCount} guests`;
-    }
-    return "Add guests";
-  }, [guestCount]);
 
   return (
     <div
@@ -57,12 +50,53 @@ export const Search = () => {
           {durationLabel}
         </div>
         <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
-          <div className="hidden sm:block">{guestLabel}</div>
-          <div className="p-2 bg-rose-500 rounded-full text-white">
+          <div className="hidden sm:block">asda</div>
+          <div className="p-2 bg-green-800 rounded-full text-white">
             <BiSearch size={18} />
           </div>
         </div>
       </div>
     </div>
+
+    ////////////////////////////
+
+    // <div
+    //   onClick={searchModal.onOpen}
+    //   className="border-[1px] w-full rounded-full py-1 shadow-sm hover:shadow-md transition flex align-center cursor-pointer"
+    // >
+    //   <div className="flex flex-row items-center justify-between">
+    //     <div className="text-[0.9rem] font-semibold px-6">{locationLabel}</div>
+    //     <div className="hidden sm:block font-semibold text-[0.9rem] px-6 border-x-[1px] flex-1 text-center">
+    //       {durationLabel}
+    //     </div>
+    //     <div className="text-[0.9rem] pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
+    //       <div className="hidden sm:block">{guestLabel}</div>
+    //       <div className="p-2 bg-green-800 rounded-full text-white">
+    //         <BiSearch size={18} />
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+
+    /////////////////////////////////
+
+    // <div
+    //   onClick={searchModal.onOpen}
+    //   className="border-[1px] w-full rounded-full py-1 shadow-sm hover:shadow-md transition flex align-center cursor-pointer"
+    // >
+    //   <div className="flex flex-row items-center justify-between">
+    //     <div className="text-[0.9rem] font-semibold px-6 text-nowrap">
+    //       {locationLabel}
+    //     </div>
+    //     <div className="hidden sm:block font-semibold text-[0.9rem] px-6 border-x-[1px] flex-1 text-center text-nowrap">
+    //       {durationLabel}
+    //     </div>
+    //     <div className="text-[0.9rem] pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
+    //       <div className="p-2 bg-green-800 rounded-full text-white">
+    //         <BiSearch size={18} />
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };

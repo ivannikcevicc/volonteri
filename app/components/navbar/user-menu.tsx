@@ -36,13 +36,19 @@ export const UserMenu = ({ currentUser }: Props) => {
     rentModal.onOpen();
   }, [currentUser, loginModal, rentModal]);
   return (
-    <div className="relative">
+    <div className="relative py-4">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={onRent}
-          className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+          className={`hidden md:block text-sm font-semibold py-3 px-4 rounded-full transition cursor-pointer ${
+            !currentUser && "hover:bg-neutral-100"
+          }`}
+          onClick={() => {
+            if (!currentUser) {
+              loginModal.onOpen();
+            }
+          }}
         >
-          Airbnb your Home
+          {currentUser ? currentUser.name : "Log in"}
         </div>
         <div
           onClick={toggleOpen}
