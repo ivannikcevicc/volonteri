@@ -45,7 +45,6 @@ const Navbar = ({ currentUser }: Props) => {
           </div>
         </Container>
       </div>
-      <Categories />
     </div>
   );
 };

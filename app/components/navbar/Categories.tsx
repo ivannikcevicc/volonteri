@@ -11,50 +11,60 @@ import {
   GiCaveEntrance,
   GiForestCamp,
   GiIsland,
+  GiPlantsAndAnimals,
   GiWindmill,
 } from "react-icons/gi";
-import { MdOutlineVilla } from "react-icons/md";
+import {
+  MdDeliveryDining,
+  MdOutlineSportsSoccer,
+  MdOutlineVilla,
+} from "react-icons/md";
+import { FaRegMoneyBill1 } from "react-icons/fa6";
 import { CategoryBox } from "./CategoryBox";
 import { usePathname, useSearchParams } from "next/navigation";
 import { FaSkiing } from "react-icons/fa";
 import { BsSnow } from "react-icons/bs";
 import { IoDiamond } from "react-icons/io5";
+import { BiFirstAid } from "react-icons/bi";
+import { PiChalkboardTeacherLight } from "react-icons/pi";
+import { SiHomebridge } from "react-icons/si";
 
 export const categories = [
   {
-    label: "Beach",
-    icon: TbBeach,
-    description: "This property is close to the beach!",
+    label: "Sport",
+    icon: MdOutlineSportsSoccer,
+    description: "Organizacija sportskih dogadjaja.",
   },
   {
-    label: "Windmills",
-    icon: GiWindmill,
-    description: "This property has windmills!",
+    label: "Prva Pomoć",
+    icon: BiFirstAid,
+    description: "Pružanje hitne medicinske pomoći povređenima",
   },
   {
-    label: "Modern",
-    icon: MdOutlineVilla,
-    description: "This property is modern!",
+    label: "Donacije",
+    icon: FaRegMoneyBill1,
+    description: "Donacije za osobe kojima je potrebno.",
   },
   {
-    label: "Countryside",
-    icon: TbMountain,
-    description: "This property is in the countryside!",
+    label: "Mentor",
+    icon: PiChalkboardTeacherLight,
+    description: "Učenje i davanje smjernica učenicima",
   },
   {
-    label: "Pools",
-    icon: TbPool,
-    description: "This property has a pool!",
+    label: "Dostava",
+    icon: MdDeliveryDining,
+    description: "Dostava hrane i osnovnih potrepština starijima ili nemoćnima",
   },
   {
-    label: "Islands",
-    icon: GiIsland,
-    description: "This property is on an island!",
+    label: "Ekosistem",
+    icon: GiPlantsAndAnimals,
+    description:
+      "Priroda i ekosistem. Akcije sa životinjama i prirodnim materijalama.",
   },
   {
-    label: "Lake",
-    icon: GiBoatFishing,
-    description: "This property is close to a lake!",
+    label: "Beskućnici",
+    icon: SiHomebridge,
+    description: "Pomoć beskućnicima kroz razne akcije.",
   },
   {
     label: "Skiing",
@@ -109,6 +119,7 @@ export const Categories = () => {
   }
   return (
     <Container>
+      {/* <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto"> */}
       <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
         {categories.map((item) => (
           <CategoryBox

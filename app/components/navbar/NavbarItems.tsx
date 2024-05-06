@@ -111,7 +111,7 @@ const NavbarItems = ({ pathname, currentUser }: Props) => {
                   router.push(`${item.route}`);
                 }
           }
-          className={`border-t-[10px] px-4 pt-5 translate-y-[-33%]  transition ${
+          className={`border-t-[10px] overflow-hidden text-nowrap text-ellipsis min-w-0 max-w-[75px] sm:max-w-[100px] px-2 pt-5 translate-y-[-35%] cursor-pointer sm:translate-y-[-30%] transition text-sm sm:text-lg md:px-4 ${
             pathname === item.route ? "border-green-800" : "border-transparent"
           }`}
           key={item.key}

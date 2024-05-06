@@ -43,13 +43,19 @@ export const CategoryBox = ({ icon: Icon, label, selected }: Props) => {
   return (
     <div
       onClick={handleClick}
-      className={`flex flex-col items-center justify-center gap-2 p-3 border-b-2  hover:text-green-900 transition cursor-pointer 
+      // className={`flex flex-col items-center justify-center gap-2 p-3 border-b-2 w-[100px] text-ellipsis hover:text-green-800 transition cursor-pointer
+      // ${selected ? "border-b-green-900" : "border-transparent"}
+      // ${selected ? "text-green-900" : "text-neutral-500"}
+      // `}
+      className={`flex flex-col items-center justify-center gap-2 p-3 border-b-2 w-[100px] text-ellipsis hover:text-green-800 transition cursor-pointer 
       ${selected ? "border-b-green-900" : "border-transparent"}
       ${selected ? "text-green-900" : "text-neutral-500"}
       `}
     >
       <Icon size={26} />
-      <div className="font-medium text-sm">{label}</div>
+      <div className="font-medium text-sm overflow-hidden text-nowrap text-ellipsis w-[50px] text-center">
+        {label}
+      </div>
     </div>
   );
 };
