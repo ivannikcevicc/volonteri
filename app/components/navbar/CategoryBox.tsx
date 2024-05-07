@@ -47,7 +47,7 @@ export const CategoryBox = ({ icon: Icon, label, selected }: Props) => {
       // ${selected ? "border-b-green-900" : "border-transparent"}
       // ${selected ? "text-green-900" : "text-neutral-500"}
       // `}
-      className={`flex flex-col items-center justify-center gap-2 p-3 border-b-2 w-[100px] text-ellipsis hover:text-green-800 transition cursor-pointer
+      className={`flex flex-col items-center justify-center gap-2 cat:p-1 p-3 border-b-2 max-w-[100px]  text-ellipsis hover:text-green-800 transition cursor-pointer
       ${selected ? "border-b-green-900" : "border-transparent"}
       ${selected ? "text-green-900" : "text-neutral-500"}
       `}
