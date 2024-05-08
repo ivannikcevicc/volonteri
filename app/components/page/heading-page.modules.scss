@@ -1,0 +1,54 @@
+.blog-grid {
+  &-header {
+    height: 40vh;
+    position: relative;
+
+    background: rgb(22, 101, 52); /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to top,
+      #becad6c2,
+      #fff
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    // background: linear-gradient(to top, #6e8297c2, #fff);
+    background: linear-gradient(to top, rgba(36, 165, 86, 0.306), #fff);
+
+    &-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      gap: 2rem;
+
+      &-main {
+        font-size: 3.5rem;
+        font-weight: 600;
+      }
+
+      &-nav {
+        font-size: 1.5rem;
+        font-weight: 500;
+        &-link {
+          color: rgb(22, 101, 52);
+          border-bottom: 1.5px solid transparent;
+          transition: all 0.3s;
+
+          &:hover {
+            border-bottom: 1.5px solid rgb(22, 101, 52);
+          }
+        }
+      }
+    }
+
+    &-img {
+      position: absolute;
+      bottom: 0%;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
