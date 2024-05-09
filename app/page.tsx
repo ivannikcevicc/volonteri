@@ -2,8 +2,6 @@ import getCurrentUser from "./actions/getCurrentUser";
 import getListings, { ListingProps } from "./actions/getListings";
 import { EmptyState } from "./components/EmptyState";
 import SearchHome from "./components/SearchHome";
-import Container from "./components/container";
-import { Heading } from "./components/heading";
 import { ListingCard } from "./components/listings/ListingCard";
 import { Categories } from "./components/navbar/Categories";
 export const dynamic = "force-dynamic";
@@ -20,6 +18,7 @@ const Home = async ({ searchParams }: Props) => {
       <SearchHome />
       <div className="cat:grid cat:grid-cols-[15fr,90fr] justify-center bg-gradient-to-t from-white to-gray-100">
         <Categories />
+
         <div className="container cat:p-0">
           {listings.length === 0 ? (
             <EmptyState showReset />

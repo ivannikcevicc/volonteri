@@ -19,9 +19,11 @@ const AboutHeading = ({
         center && "max-w-[90%] cat:max-w-[900px] mx-auto"
       } text-center align-center justify-center gap-4  ${className} `}
     >
-      <h3 className="text-2xl">{title}</h3>
+      <h3 className="text-xl cat:text-2xl">{title}</h3>
       {subtitle && (
-        <p className="text-lg text-wrap text-gray-500">{subtitle}</p>
+        <p className="text-md cat:text-lg text-wrap text-gray-500">
+          {subtitle}
+        </p>
       )}
     </div>
   );

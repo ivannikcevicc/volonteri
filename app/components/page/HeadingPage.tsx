@@ -12,18 +12,19 @@ const HeadingPage = ({ title }: Props) => {
   return (
     <div className="blog-grid-header w-full">
       <div className="blog-grid-header-text">
-        <h3 className="blog-grid-header-text-main">{title}</h3>
+        <h3 className="blog-grid-header-text-main ">{title}</h3>
         <div className="blog-grid-header-text-nav">
-          <span className="blog-grid-header-text-nav-link">Home</span> &rarr;
           <span
-            className="blog-grid-header-text-nav-destination"
+            className="blog-grid-header-text-nav-link"
             onClick={() => {
               router.push("/");
               router.refresh();
             }}
           >
-            {title}
-          </span>
+            Home
+          </span>{" "}
+          &rarr;
+          <span className="blog-grid-header-text-nav-destination">{title}</span>
         </div>
       </div>
       <svg

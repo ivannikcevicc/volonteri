@@ -8,7 +8,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   return (
-    <div className="pb-10 pt-5 text-center flex flex-col items-center align-center gap-3">
+    <div className="pb-10 pt-5 text-center flex flex-col items-center align-center gap-7">
       <div
         onClick={() => {
           router.push("/");
