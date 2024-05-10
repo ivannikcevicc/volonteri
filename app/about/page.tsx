@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import AboutHeading from "../components/about/AboutHeading";
 import HeadingPage from "../components/page/HeadingPage";
