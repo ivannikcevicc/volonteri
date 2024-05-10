@@ -51,11 +51,11 @@ const ImageText = ({
         </h4>
         <p className="text-lg sm:text-xl">{subtitle}</p>
         <div className="flex flex-col sm:flex-row [&>*:nth-child(odd)]:pr-0 sm:[&>*:nth-child(odd)]:pr-10 [&>*:nth-child(even)]:pl-0 sm:[&>*:nth-child(even)]:pl-10 divide-y-2 sm:divide-x-2 sm:divide-y-0 divide-gray-400 py-0 sm:py-2">
-          <div className="flex flex-col gap-2 font-semibold py-4">
+          <div className="flex items-start flex-col gap-2 font-semibold py-4">
             <Tip text="Lorem ipsum dolor" />
             <Tip text="Lorem ipsum dolor" />
           </div>
-          <div className="flex flex-col gap-2 font-semibold py-4">
+          <div className="flex items-start flex-col gap-2 font-semibold py-4">
             <Tip text="Lorem ipsum dolor" />
             <Tip text="Lorem ipsum dolor" />
           </div>

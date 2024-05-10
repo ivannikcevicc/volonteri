@@ -101,7 +101,7 @@ const NavbarItems = ({ pathname, currentUser }: Props) => {
   ];
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row flex-shrink">
       {NavItems.map((item) => (
         <div
           onClick={
@@ -111,7 +111,7 @@ const NavbarItems = ({ pathname, currentUser }: Props) => {
                   router.push(`${item.route}`);
                 }
           }
-          className={`border-t-[10px] overflow-hidden text-nowrap text-ellipsis min-w-0 max-w-[75px] sm:max-w-[100px] px-2 pt-5 translate-y-[-35%] cursor-pointer sm:translate-y-[-30%] transition text-sm sm:text-lg md:px-4 ${
+          className={`border-t-[10px] overflow-hidden text-nowrap text-ellipsis min-w-0 max-w-[65px] xs:max-w-[100px] sm:max-w-[125px] px-1 xs:px-2 pt-5 translate-y-[-35%] cursor-pointer sm:translate-y-[-30%] transition text-sm sm:text-lg md:px-4 ${
             pathname === item.route ? "border-green-800" : "border-transparent"
           }`}
           key={item.key}
