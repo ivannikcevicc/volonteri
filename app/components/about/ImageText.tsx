@@ -2,7 +2,7 @@
 
 import "./image-text.modules.scss";
 import { IoRocketOutline } from "react-icons/io5";
-import Tip from "./tip";
+import Tip from "./Tip";
 import { Button } from "../button";
 
 interface Props {
