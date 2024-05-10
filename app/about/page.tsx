@@ -2,8 +2,10 @@ import React from "react";
 import AboutHeading from "../components/about/AboutHeading";
 import HeadingPage from "../components/page/HeadingPage";
 import ImageText from "../components/about/ImageText";
+import { useRouter } from "next/navigation";
 
 const About = () => {
+  const router = useRouter();
   return (
     <>
       <HeadingPage title="O nama" />
@@ -16,6 +18,10 @@ const About = () => {
       <ImageText
         title="Achieving Growth and Excellence: Our Action Plan"
         src="/volonteri.png"
+        buttonLabel="Potraži poslove"
+        onClick={() => {
+          router.push("/");
+        }}
         invert={true}
         subtitle="We are a goal-oriented organization with a carefully crafted action plan. Our commitment lies in investing in initiatives that lead to stronger and expanded customer relationships."
       ></ImageText>
