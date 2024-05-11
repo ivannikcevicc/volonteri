@@ -66,46 +66,6 @@ export const categories = [
     icon: SiHomebridge,
     description: "Pomoć beskućnicima kroz razne akcije.",
   },
-  {
-    label: "Skiing",
-    icon: FaSkiing,
-    description: "This property has skiing activities!",
-  },
-  {
-    label: "Castles",
-    icon: GiCastle,
-    description: "This property is in a castle!",
-  },
-  {
-    label: "Camping",
-    icon: GiForestCamp,
-    description: "This property has camping facilities!",
-  },
-  {
-    label: "Arctic",
-    icon: BsSnow,
-    description: "This property is in a snowing environment!",
-  },
-  {
-    label: "Cave",
-    icon: GiCaveEntrance,
-    description: "This property is in a cave!",
-  },
-  {
-    label: "Desert",
-    icon: GiCactus,
-    description: "This property is in a desert!",
-  },
-  {
-    label: "Barns",
-    icon: GiBarn,
-    description: "This property is in a barn!",
-  },
-  {
-    label: "Lux",
-    icon: IoDiamond,
-    description: "This property is luxurious!",
-  },
 ];
 
 export const Categories = () => {

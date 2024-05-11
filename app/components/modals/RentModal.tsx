@@ -93,7 +93,7 @@ export const RentModal = () => {
 
     setIsLoading(true);
     axios
-      .post("/api/listings", data)
+      .post("/api/jobs", data)
       .then(() => {
         toast.success("Listing created!");
         router.refresh();
@@ -129,8 +129,8 @@ export const RentModal = () => {
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
-        title="Which of these best describes your place?"
-        subtitle="Pick a category"
+        title="Šta od navedenog najbolje opisuje posao?"
+        subtitle="Izaberi kategoriju"
       ></Heading>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
         {categories.map((item) => (

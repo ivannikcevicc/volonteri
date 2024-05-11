@@ -15,25 +15,23 @@ export async function POST(request: Request) {
     description,
     imageSrc,
     category,
-    roomCount,
-    bathroomCount,
-    guestCount,
+    createdAt,
+    jobTime,
+    people,
     location,
-    price,
   } = body;
 
-  const listing = await prismadb.listing.create({
+  const listing = await prismadb.job.create({
     data: {
       title,
       description,
       imageSrc,
       category,
-      roomCount,
-      bathroomCount,
-      guestCount,
       locationValue: location.value,
-      price: parseInt(price, 10),
       userId: currentUser.id,
+      createdAt,
+      jobTime,
+      peopleCount: people,
     },
   });
 
