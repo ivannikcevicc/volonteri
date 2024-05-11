@@ -5,14 +5,16 @@ import React from "react";
 
 interface Props {
   src?: string | null | undefined;
+  height?: number | `${number}` | undefined;
+  width?: number | `${number}` | undefined;
 }
 
-export const Avatar = ({ src }: Props) => {
+export const Avatar = ({ src, height = "30", width = "30" }: Props) => {
   return (
     <Image
       className="rounded-full"
-      height="30"
-      width={"30"}
+      height={height}
+      width={width}
       alt="Avatar"
       src={src || "/placeholder.webp"}
     ></Image>

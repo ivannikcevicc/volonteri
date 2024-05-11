@@ -10,8 +10,15 @@ declare global {
 interface Props {
   onChange: (value: string) => void;
   value: string;
+  padding?: string;
+  label?: string;
 }
-export const ImageUpload = ({ onChange, value }: Props) => {
+export const ImageUpload = ({
+  onChange,
+  value,
+  padding = "20",
+  label = "Click to Upload",
+}: Props) => {
   const handleUpload = useCallback(
     (result: any) => {
       onChange(result.info.secure_url);
@@ -31,10 +38,12 @@ export const ImageUpload = ({ onChange, value }: Props) => {
         return (
           <div
             onClick={() => open?.()}
-            className="relative cursor-pointer hover:opacity-70 transition border-dashed border-2 p-20 flex flex-col border-neutral-200 justify-center items-center gap-4 text-neutral-600"
+            className={` ${
+              label === "" ? "" : " gap-4 "
+            } relative cursor-pointer hover:opacity-70 transition border-dashed border-2 p-${padding} flex flex-col border-neutral-200 justify-center items-center  text-neutral-600`}
           >
             <TbPhotoPlus size={50} />
-            <div className="font-semibold text-lg">Click to Upload</div>
+            <div className="font-semibold text-lg text-center">{label}</div>
             {value && (
               <div className="absolute inset-0 w-full h-full">
                 <Image

@@ -11,6 +11,7 @@ import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
 import { useRentModal } from "@/app/hooks/useRentModal";
 import { useRouter } from "next/navigation";
+import { useProfileModal } from "@/app/hooks/useProfileModal";
 
 interface Props {
   currentUser?: SafeUser | null;
@@ -21,6 +22,7 @@ export const UserMenu = ({ currentUser }: Props) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
+  const profileModal = useProfileModal();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
@@ -66,6 +68,7 @@ export const UserMenu = ({ currentUser }: Props) => {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
+                <MenuItem onClick={profileModal.onOpen} label="Edit profile" />
                 <MenuItem
                   onClick={() => router.push("/trips")}
                   label="My trips"
