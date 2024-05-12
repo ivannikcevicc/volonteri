@@ -44,7 +44,8 @@ export const ReservationsClient = ({ reservations, currentUser }: Props) => {
         {reservations.map((reservation) => (
           <ListingCard
             key={reservation.id}
-            data={reservation.listing}
+            //@ts-ignore
+            data={reservation}
             reservation={reservation}
             actionId={reservation.id}
             onAction={onCancel}
