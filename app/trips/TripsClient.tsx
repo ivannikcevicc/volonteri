@@ -46,6 +46,7 @@ export const TripsClient = ({ reservations, currentUser }: Props) => {
           <ListingCard
             key={reservation.id}
             reservation={reservation}
+            //@ts-ignore
             data={reservation.listing}
             actionId={reservation.id}
             onAction={onCancel}
