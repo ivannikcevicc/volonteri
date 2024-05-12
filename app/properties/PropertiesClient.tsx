@@ -1,16 +1,17 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
-import { SafeListing, SafeUser } from "../types";
+import { SafeUser } from "../types";
 import Container from "../components/container";
 import { Heading } from "../components/heading";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ListingCard } from "../components/listings/ListingCard";
+import { Job } from "@prisma/client";
 
 interface Props {
-  listings: SafeListing[];
+  listings: Job[];
   currentUser?: SafeUser | null;
 }
 export const PropertiesClient = ({ listings, currentUser }: Props) => {

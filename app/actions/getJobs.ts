@@ -103,7 +103,6 @@ export default async function getJobs(params: JobProps) {
 
     const safeJobs = jobs.map((job) => ({
       ...job,
-      createdAt: job.createdAt.toISOString(),
     }));
 
     return safeJobs;
