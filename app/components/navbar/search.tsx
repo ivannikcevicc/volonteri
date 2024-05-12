@@ -1,6 +1,5 @@
 "use client";
 
-import useCountries from "@/app/hooks/useCountries";
 import useSearchModal from "@/app/hooks/useSearchModal copy";
 import { differenceInDays, startOfDay } from "date-fns";
 import { useSearchParams } from "next/navigation";
@@ -9,35 +8,35 @@ import { BiSearch } from "react-icons/bi";
 
 export const Search = () => {
   const params = useSearchParams();
-  const { getByValue } = useCountries();
   const searchModal = useSearchModal();
 
-  const locationValue = params?.get("locationValue");
-  const startDate = params?.get("startDate");
-  const endDate = params?.get("endDate");
-  const guestCount = params?.get("guestCount");
+  const cityName = params?.get("cityName");
+  console.log(cityName);
+  // const startDate = params?.get("startDate");
+  // const endDate = params?.get("endDate");
 
   const locationLabel = useMemo(() => {
-    if (locationValue) {
-      return getByValue(locationValue as string)?.label;
+    if (cityName) {
+      return `${cityName}`;
     }
+
     return "Anywhere";
-  }, [getByValue, locationValue]);
+  }, [cityName]);
 
-  const durationLabel = useMemo(() => {
-    if (startDate && endDate) {
-      const start = new Date(startDate as string);
-      const end = new Date(endDate as string);
-      let diff = differenceInDays(end, start);
+  // const durationLabel = useMemo(() => {
+  //   if (startDate && endDate) {
+  //     const start = new Date(startDate as string);
+  //     const end = new Date(endDate as string);
+  //     let diff = differenceInDays(end, start);
 
-      if (diff === 0) {
-        diff = 1;
-      }
+  //     if (diff === 0) {
+  //       diff = 1;
+  //     }
 
-      return `${diff} days`;
-    }
-    return "Anytime";
-  }, [startDate, endDate]);
+  //     return `${diff} days`;
+  //   }
+  //   return "Anytime";
+  // }, [startDate, endDate]);
 
   return (
     <div
@@ -46,11 +45,10 @@ export const Search = () => {
     >
       <div className="flex flex-row items-center justify-between">
         <div className="text-sm font-semibold px-6">{locationLabel}</div>
-        <div className="hidden sm:block font-semibold text-sm px-6 border-x-[1px] flex-1 text-center">
+        {/* <div className="hidden sm:block font-semibold text-sm px-6 border-x-[1px] flex-1 text-center">
           {durationLabel}
-        </div>
+        </div> */}
         <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
-          <div className="hidden sm:block">asda</div>
           <div className="p-2 bg-green-800 rounded-full text-white">
             <BiSearch size={18} />
           </div>

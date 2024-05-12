@@ -15,7 +15,6 @@ import { Input } from "../inputs/input";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Calendar } from "../inputs/Calendar";
 import { Range } from "react-date-range";
 
 const initialDateRange = {
@@ -29,15 +28,13 @@ enum STEPS {
   LOCATION = 1,
   INFO = 2,
   IMAGES = 3,
-  TIME = 4,
-  DESCRIPTION = 5,
+  DESCRIPTION = 4,
 }
 
 export const RentModal = () => {
   const rentModal = useRentModal();
   const [step, setStep] = useState(STEPS.CATEGORY);
   const [isLoading, setIsLoading] = useState(false);
-  const [dateRange, setDateRange] = useState<Range>(initialDateRange);
   const router = useRouter();
 
   const {
@@ -55,7 +52,6 @@ export const RentModal = () => {
       imageSrc: "",
       price: 1,
       title: "",
-      jobTime: undefined,
       description: "",
     },
   });
@@ -88,10 +84,6 @@ export const RentModal = () => {
   const onBack = () => {
     setStep((value) => value - 1);
   };
-  const onChangeDate = (range: Range) => {
-    setDateRange(range);
-    setCustomValue("jobTime", range);
-  };
 
   const onNext = () => {
     setStep((value) => value + 1);
@@ -104,7 +96,14 @@ export const RentModal = () => {
 
     setIsLoading(true);
     axios
-      .post("/api/jobs", data)
+      .post("/api/jobs", {
+        ...data,
+        cityName: data.location.cityName,
+        countryName: data.location.countryName,
+        lat: data.location.lat,
+        lng: data.location.lng,
+        jobTime: data.jobTime,
+      })
       .then(() => {
         toast.success("Listing created!");
         router.refresh();
@@ -211,22 +210,6 @@ export const RentModal = () => {
       </div>
     );
   }
-
-  if (step === STEPS.TIME) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="How would you describe your place?"
-          subtitle="Short and sweet works best!"
-        />
-        <Calendar
-          value={jobTime}
-          onChange={(value) => onChangeDate(value.selection)}
-        />
-      </div>
-    );
-  }
-
   if (step === STEPS.DESCRIPTION) {
     bodyContent = (
       <div className="flex flex-col gap-8">

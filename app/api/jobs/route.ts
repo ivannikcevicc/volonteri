@@ -12,10 +12,13 @@ export async function POST(request: Request) {
 
   const {
     category,
-    location,
+    cityName,
+    lat,
+    lng,
+    countryName,
+    flag,
     peopleCount,
     imageSrc,
-    price,
     title,
     description,
   } = body;
@@ -26,9 +29,12 @@ export async function POST(request: Request) {
       description,
       imageSrc,
       category,
-      locationValue: location.value,
+      cityName,
+      lat,
+      lng,
+      countryName,
+      flag,
       userId: currentUser.id,
-      jobTime,
       peopleCount: peopleCount,
     },
   });

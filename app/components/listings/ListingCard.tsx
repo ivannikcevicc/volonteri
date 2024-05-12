@@ -1,15 +1,15 @@
 "use client";
-import useCountries from "@/app/hooks/useCountries";
+import { Country, City } from "country-state-city";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useMemo } from "react";
-import { format } from "date-fns";
 import Image from "next/image";
-import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
+import { SafeReservation, SafeUser } from "@/app/types";
 import { HeartButton } from "../HeartButton";
 import { Button } from "../button";
+import { Job } from "@prisma/client";
 
 interface Props {
-  data: SafeListing;
+  data: Job;
   reservation?: SafeReservation;
   onAction?: (id: string) => void;
   disabled?: boolean;
@@ -20,7 +20,6 @@ interface Props {
 
 export const ListingCard = ({
   data,
-  reservation,
   onAction,
   disabled,
   actionLabel,
@@ -28,8 +27,8 @@ export const ListingCard = ({
   currentUser,
 }: Props) => {
   const router = useRouter();
-  const { getByValue } = useCountries();
-  const location = getByValue(data.locationValue);
+  console.log(data);
+
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
@@ -38,23 +37,6 @@ export const ListingCard = ({
     },
     [onAction, actionId, disabled]
   );
-
-  const price = useMemo(() => {
-    if (reservation) {
-      return reservation.totalPrice;
-    }
-    return data.price;
-  }, [reservation, data.price]);
-
-  const reservationDate = useMemo(() => {
-    if (!reservation) {
-      return null;
-    }
-    const start = new Date(reservation.startDate);
-    const end = new Date(reservation.endDate);
-    return `${format(start, "PP")} - ${format(end, "PP")}`;
-  }, [reservation]);
-
   return (
     <div
       onClick={() => router.push(`listings/${data.id}`)}
@@ -76,15 +58,9 @@ export const ListingCard = ({
           </div>
         </div>
         <div className="font-semibold text-lg">
-          {location?.countryName}, {location?.cityName}
+          {data.cityName}, {data.countryName}
         </div>
-        <div className="font-light text-neutral-500">
-          {reservationDate || data.category}
-        </div>
-        <div className="flex flex-row items-center gap-1">
-          <div className="font-semibold">$ {price}</div>
-          {!reservation && <div className="font-light">night</div>}
-        </div>
+        <div className="flex flex-row items-center gap-1">aaaaaaaaaaa</div>
         {onAction && actionLabel && (
           <Button
             disabled={disabled}

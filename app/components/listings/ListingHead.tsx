@@ -1,14 +1,14 @@
 "use client";
 
 import useCountries from "@/app/hooks/useCountries";
-import { SafeUser } from "@/app/types";
+import { LocationValue, SafeUser } from "@/app/types";
 import React from "react";
 import { Heading } from "../heading";
 import Image from "next/image";
 import { HeartButton } from "../HeartButton";
 interface Props {
   title: string;
-  locationValue: string;
+  locationValue: LocationValue;
   imageSrc: string;
   id: string;
   currentUser: SafeUser | null;
@@ -21,8 +21,7 @@ export const ListingHead = ({
   id,
   currentUser,
 }: Props) => {
-  const { getByValue } = useCountries();
-  const location = getByValue(locationValue);
+  const location = locationValue;
   return (
     <>
       <Heading

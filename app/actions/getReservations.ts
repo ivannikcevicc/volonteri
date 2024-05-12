@@ -26,7 +26,7 @@ export default async function getReservations(params: Props) {
     const reservations = await prismadb.reservation.findMany({
       where: query,
       include: {
-        listing: true,
+        Job: true,
       },
       orderBy: {
         createdAt: "desc",
@@ -39,8 +39,8 @@ export default async function getReservations(params: Props) {
       startDate: reservation.startDate.toISOString(),
       endDate: reservation.endDate.toISOString(),
       listing: {
-        ...reservation.listing,
-        createdAt: reservation.listing.createdAt.toISOString(),
+        ...reservation.Job,
+        createdAt: reservation.Job.createdAt.toISOString(),
       },
     }));
     return safeReservations;

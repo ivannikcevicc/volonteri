@@ -1,8 +1,4 @@
-import { Listing, Reservation, User } from "@prisma/client";
-
-export type SafeListing = Omit<Listing, "createdAt"> & {
-  createdAt: string;
-};
+import { Reservation, User } from "@prisma/client";
 
 export type SafeReservation = Omit<
   Reservation,
@@ -11,7 +7,6 @@ export type SafeReservation = Omit<
   createdAt: string;
   startDate: string;
   endDate: string;
-  listing: SafeListing;
 };
 export type SafeUser = Omit<
   User,
@@ -20,4 +15,25 @@ export type SafeUser = Omit<
   createdAt: string;
   updatedAt: string;
   emailVerified: string | null;
+};
+
+export interface LocationValue {
+  cityName?: string | null;
+  countryName?: string | null;
+  flag?: string | null;
+  lat?: string | null;
+  lng?: string | null;
+  // Other properties if applicable
+}
+
+export type SafeJob = {
+  id: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+  createdAt: Date;
+  category: string;
+  locationValue: LocationValue; // Use the specific interface here
+  userId: string;
+  peopleCount: number;
 };

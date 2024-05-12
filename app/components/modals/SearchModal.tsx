@@ -2,20 +2,14 @@
 
 import React, { useCallback, useMemo, useState } from "react";
 import { Modal } from "./modal";
-import { Range } from "react-date-range";
 import useSearchModal from "@/app/hooks/useSearchModal copy";
 import { useRouter, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { CountrySelect, CountrySelectValue } from "../inputs/CountrySelect";
 import qs from "query-string";
-import { formatISO } from "date-fns";
 import { Heading } from "../heading";
-import { Calendar } from "../inputs/Calendar";
-import { Counter } from "../inputs/Counter";
 enum STEPS {
   LOCATION = 0,
-  DATE = 1,
-  INFO = 2,
 }
 const SearchModal = () => {
   const router = useRouter();
@@ -23,15 +17,6 @@ const SearchModal = () => {
   const [location, setLocation] = useState<CountrySelectValue>();
   const searchModal = useSearchModal();
   const [step, setStep] = useState(STEPS.LOCATION);
-  const [guestCount, setGuestCount] = useState(1);
-  const [roomCount, setRoomCount] = useState(1);
-  const [bathroomCount, setBathroomCount] = useState(1);
-  const [dateRange, setDateRange] = useState<Range>({
-    startDate: new Date(),
-    endDate: new Date(),
-    key: "selection",
-  });
-
   const Map = useMemo(
     () =>
       dynamic(() => import("../map"), {
@@ -49,7 +34,7 @@ const SearchModal = () => {
   }, []);
 
   const onSubmit = useCallback(async () => {
-    if (step !== STEPS.INFO) {
+    if (step !== STEPS.LOCATION) {
       return onNext();
     }
 
@@ -61,18 +46,8 @@ const SearchModal = () => {
 
     const updatedQuery: any = {
       ...currentQuery,
-      locationValue: location?.value,
-      guestCount,
-      roomCount,
-      bathroomCount,
+      cityName: location?.cityName,
     };
-    if (dateRange.startDate) {
-      updatedQuery.startDate = formatISO(dateRange.startDate);
-    }
-
-    if (dateRange.endDate) {
-      updatedQuery.endDate = formatISO(dateRange.endDate);
-    }
 
     const url = qs.stringifyUrl(
       {
@@ -84,21 +59,10 @@ const SearchModal = () => {
     setStep(STEPS.LOCATION);
     searchModal.onClose();
     router.push(url);
-  }, [
-    step,
-    searchModal,
-    location,
-    router,
-    guestCount,
-    roomCount,
-    bathroomCount,
-    dateRange,
-    onNext,
-    params,
-  ]);
+  }, [step, searchModal, location, router, onNext, params]);
 
   const actionLabel = useMemo(() => {
-    if (step === STEPS.INFO) {
+    if (step === STEPS.LOCATION) {
       return "Search";
     }
     return "Next";
@@ -112,7 +76,10 @@ const SearchModal = () => {
   }, [step]);
 
   let center: any = undefined;
-  center = [location?.lat, location?.lng];
+
+  if (location) {
+    center = [location?.lat, location?.lng];
+  }
 
   let bodyContent = (
     <div className="flex flex-col gap-8">
@@ -128,50 +95,6 @@ const SearchModal = () => {
       <Map center={center} />
     </div>
   );
-
-  if (step === STEPS.DATE) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="When do you plan to go?"
-          subtitle={"Make sure everyone is free!"}
-        />
-        <Calendar
-          value={dateRange}
-          onChange={(value) => setDateRange(value.selection)}
-        />
-      </div>
-    );
-  }
-
-  if (step === STEPS.INFO) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="More Information"
-          subtitle={"Find your perfect place!"}
-        />
-        <Counter
-          title="Guests"
-          subtitle="How many guests are coming?"
-          value={guestCount}
-          onChange={(value) => setGuestCount(value)}
-        />
-        <Counter
-          title="Rooms"
-          subtitle="How many rooms do you need?"
-          value={roomCount}
-          onChange={(value) => setRoomCount(value)}
-        />
-        <Counter
-          title="Bathrooms"
-          subtitle="How many bathrooms do you need?"
-          value={bathroomCount}
-          onChange={(value) => setBathroomCount(value)}
-        />
-      </div>
-    );
-  }
 
   return (
     <Modal

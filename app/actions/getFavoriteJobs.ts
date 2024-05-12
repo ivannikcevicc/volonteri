@@ -1,7 +1,8 @@
 import prismadb from "../libs/prismadb";
 import getCurrentUser from "./getCurrentUser";
+import { LocationValue } from "@/app/types"; // Assuming LocationValue is defined in this file
 
-export default async function getFavoriteListings() {
+export default async function getFavoriteJobs() {
   try {
     const currentUser = await getCurrentUser();
 
@@ -9,7 +10,7 @@ export default async function getFavoriteListings() {
       return [];
     }
 
-    const favorites = await prismadb.listing.findMany({
+    const favorites = await prismadb.job.findMany({
       where: {
         id: {
           in: [...(currentUser.favoriteIds || [])],
@@ -19,7 +20,7 @@ export default async function getFavoriteListings() {
 
     const safeFavorites = favorites.map((favorite) => ({
       ...favorite,
-      createdAt: favorite.createdAt.toISOString(),
+      createdAt: favorite.createdAt,
     }));
 
     return safeFavorites;

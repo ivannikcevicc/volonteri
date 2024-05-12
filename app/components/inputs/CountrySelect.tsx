@@ -3,12 +3,11 @@ import useCountries from "@/app/hooks/useCountries";
 import React from "react";
 import Select from "react-select";
 export type CountrySelectValue = {
+  cityName: string;
+  countryName: string;
   flag: string;
-  label: string;
-  lat: number;
-  lng: number;
-  region: string;
-  value: string;
+  lat: string;
+  lng: string;
 };
 
 interface Props {
