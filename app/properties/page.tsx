@@ -1,6 +1,6 @@
 import { EmptyState } from "../components/EmptyState";
 import getCurrentUser from "../actions/getCurrentUser";
-import getListings from "../actions/getListings";
+import getJobs from "../actions/getJobs";
 import { PropertiesClient } from "./PropertiesClient";
 
 const PropertiesPage = async () => {
@@ -11,7 +11,7 @@ const PropertiesPage = async () => {
     );
   }
 
-  const listings = await getListings({ userId: currentUser.id });
+  const listings = await getJobs({ userId: currentUser.id });
 
   if (listings.length === 0) {
     return (
