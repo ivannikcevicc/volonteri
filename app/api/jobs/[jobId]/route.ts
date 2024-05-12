@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import prismadb from "@/app/libs/prismadb";
 interface Props {
-  listingId?: string;
+  jobId?: string;
 }
 
 export async function DELETE(request: Request, { params }: { params: Props }) {
@@ -12,18 +12,18 @@ export async function DELETE(request: Request, { params }: { params: Props }) {
     return NextResponse.error();
   }
 
-  const { listingId } = params;
+  const { jobId } = params;
 
-  if (!listingId || typeof listingId !== "string") {
+  if (!jobId || typeof jobId !== "string") {
     throw new Error("Invalid ID");
   }
 
-  const listing = await prismadb.listing.deleteMany({
+  const job = await prismadb.job.deleteMany({
     where: {
-      id: listingId,
+      id: jobId,
       userId: currentUser.id,
     },
   });
 
-  return NextResponse.json(listing);
+  return NextResponse.json(job);
 }

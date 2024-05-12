@@ -37,7 +37,13 @@ export const ListingInfo = ({
   locationValue,
 }: Props) => {
   const { getByValue } = useCountries();
-  const coordinates = getByValue(locationValue)?.latlng;
+  let coordinates:any = undefined;
+  if (coordinates) {
+    coordinates = [
+      getByValue(locationValue)?.lat,
+      getByValue(locationValue)?.lng,
+    ];
+  }
   return (
     <div className="col-span-4 flex flex-col gap-8">
       <div className="flex flex-col gap-2">

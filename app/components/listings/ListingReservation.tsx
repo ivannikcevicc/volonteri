@@ -6,17 +6,15 @@ import { Button } from "../button";
 
 interface Props {
   price: number;
-  totalPrice: number;
   onChangeDate: (value: Range) => void;
   dateRange: Range;
   onSubmit: () => void;
   disabled?: boolean;
-  disabledDates: Date[];
+  disabledDates?: Date[];
 }
 
 export const ListingReservation = ({
   price,
-  totalPrice,
   onChangeDate,
   dateRange,
   onSubmit,
@@ -42,7 +40,7 @@ export const ListingReservation = ({
       </div>
       <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
         <div>Total</div>
-        <div>$ {totalPrice}</div>
+        {/* Here should be the number of days */}
       </div>
     </div>
   );

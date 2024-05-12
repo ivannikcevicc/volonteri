@@ -111,6 +111,9 @@ const SearchModal = () => {
     return "Back";
   }, [step]);
 
+  let center: any = undefined;
+  center = [location?.lat, location?.lng];
+
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
@@ -122,7 +125,7 @@ const SearchModal = () => {
         onChange={(value) => setLocation(value as CountrySelectValue)}
       />
       <hr />
-      <Map center={location?.latlng} />
+      <Map center={center} />
     </div>
   );
 

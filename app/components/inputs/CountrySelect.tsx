@@ -1,13 +1,12 @@
 "use client";
 import useCountries from "@/app/hooks/useCountries";
-import { Count } from "@prisma/client/runtime/library";
 import React from "react";
-import { DiVim } from "react-icons/di";
 import Select from "react-select";
 export type CountrySelectValue = {
   flag: string;
   label: string;
-  latlng: number[];
+  lat: number;
+  lng: number;
   region: string;
   value: string;
 };
@@ -18,21 +17,23 @@ interface Props {
 }
 
 export const CountrySelect = ({ value, onChange }: Props) => {
-  const { getAll } = useCountries();
+  const { getAllCities } = useCountries();
 
   return (
     <div>
       <Select
         placeholder="Anywhere"
         isClearable
-        options={getAll()}
+        options={getAllCities()}
         value={value}
         formatOptionLabel={(option: any) => (
           <div className="flex flex-row items-center gap-3">
-            <div>{option.flag}</div>
+            <div>{option.countryFlag}</div>
             <div>
-              {option.label},{" "}
-              <span className="text-neutral-500 ml-1">{option.region}</span>
+              {option.cityName},{" "}
+              <span className="text-neutral-500 ml-1">
+                {option.countryName}
+              </span>
             </div>
           </div>
         )}
@@ -47,7 +48,7 @@ export const CountrySelect = ({ value, onChange }: Props) => {
           colors: {
             ...theme.colors,
             primary: "black",
-            primary25: "#ffe4e6",
+            primary25: "#bbf7d0",
           },
         })}
         onChange={(value) => onChange(value as CountrySelectValue)}

@@ -76,7 +76,7 @@ export const ListingCard = ({
           </div>
         </div>
         <div className="font-semibold text-lg">
-          {location?.region}, {location?.label}
+          {location?.countryName}, {location?.cityName}
         </div>
         <div className="font-light text-neutral-500">
           {reservationDate || data.category}

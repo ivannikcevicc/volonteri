@@ -27,7 +27,7 @@ export const ListingHead = ({
     <>
       <Heading
         title={title}
-        subtitle={`${location?.region}, ${location?.label}`}
+        subtitle={`${location?.countryName}, ${location?.cityName}`}
       />
       <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">
         <Image

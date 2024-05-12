@@ -21,8 +21,8 @@ interface Props {
 const Map = ({ center }: Props) => {
   return (
     <MapContainer
-      center={(center as L.LatLngExpression) || [51, -0.09]}
-      zoom={center ? 4 : 2}
+      center={(center as L.LatLngExpression) || [42.442574, 19.268646]}
+      zoom={center ? 11 : 8}
       scrollWheelZoom={false}
       className="h-[35vh] rounded-lg"
     >
