@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     return NextResponse.error();
   }
 
-  const listingAndReservation = await prismadb.listing.update({
+  const listingAndReservation = await prismadb.job.update({
     where: {
       id: listingId,
     },
