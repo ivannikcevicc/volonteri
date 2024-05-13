@@ -28,8 +28,9 @@ enum STEPS {
   LOCATION = 1,
   INFO = 2,
   ORGANIZATION = 3,
-  IMAGES = 4,
-  DESCRIPTION = 5,
+  CONTACT = 4,
+  IMAGES = 5,
+  DESCRIPTION = 6,
 }
 
 export const RentModal = () => {
@@ -214,11 +215,7 @@ export const RentModal = () => {
           title="Organization Information"
           subtitle="Provide valid data about your organization."
         />
-        {/* organizationName: "",
-      postLink: "",
-      email: "",
-      phoneNumber: "",
-      organizationLink: "", */}
+        <hr />
         <Input
           id="organizationName"
           label="Organization Name"
@@ -226,6 +223,9 @@ export const RentModal = () => {
           register={register}
           errors={errors}
           required
+          regex={/^[a-zA-Z0-9\s]+$/}
+          requiredMsg="Organization name is required."
+          errorMsg="Only letters, numbers and spaces allowed"
         />
         <Input
           id="organizationLink"
@@ -234,6 +234,9 @@ export const RentModal = () => {
           register={register}
           errors={errors}
           required
+          regex={/^https?:\/\/.+$/}
+          requiredMsg="Link to the organization is required."
+          errorMsg="Please enter a valid URL"
         />
         <Input
           id="postLink"
@@ -242,12 +245,21 @@ export const RentModal = () => {
           register={register}
           errors={errors}
           required
+          regex={/^https?:\/\/.+$/}
+          requiredMsg="Link to an external post is required."
+          errorMsg="Please enter a valid URL"
         />
-        <hr />
+      </div>
+    );
+  }
+  if (step === STEPS.CONTACT) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
         <Heading
           title="Contact Information"
           subtitle="Where volunteers can reach you."
         />
+        <hr />
         <Input
           id="email"
           label="Email"
@@ -255,6 +267,9 @@ export const RentModal = () => {
           register={register}
           errors={errors}
           required
+          regex={/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/}
+          requiredMsg="Email is required."
+          errorMsg="Please enter a valid email address"
         />
         <Input
           id="phoneNumber"
@@ -263,6 +278,9 @@ export const RentModal = () => {
           register={register}
           errors={errors}
           required
+          regex={/(\+)?(\(?\d+\)?)(([\s-]+)?(\d+)){0,13}/}
+          requiredMsg="Phone Number is required."
+          errorMsg="Please enter a valid phone number. Try the + operator"
         />
       </div>
     );
@@ -296,6 +314,9 @@ export const RentModal = () => {
           register={register}
           errors={errors}
           required
+          regex={/^[a-zA-Z0-9\s]+$/}
+          requiredMsg="Title is required."
+          errorMsg="Please enter a valid title."
         />
         <hr />
         <Input
@@ -305,6 +326,9 @@ export const RentModal = () => {
           register={register}
           errors={errors}
           required
+          regex={/[\s\S]*/}
+          requiredMsg="Description is required."
+          errorMsg="Please enter a valid description."
         />
       </div>
     );

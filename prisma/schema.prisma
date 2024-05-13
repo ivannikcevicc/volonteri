@@ -25,7 +25,7 @@ model User {
   favoriteIds String[] @db.ObjectId
   accounts Account[]
   jobs Job[]
-  reservations Reservation[]
+  applications Application[]
 }
 
 model Account {
@@ -67,16 +67,18 @@ model Job {
   peopleCount Int
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  reservations Reservation[]
+  applications Application[]
 }
 
-model Reservation {
+model Application {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @db.ObjectId
   jobId String @db.ObjectId
-  startDate DateTime
-  endDate DateTime
-  totalPrice Int
+  fileUrl String
+  name String
+  email String
+  phoneNumber String
+  expirience String
   createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

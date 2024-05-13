@@ -14,6 +14,9 @@ interface Props {
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
+  requiredMsg: string;
+  errorMsg: string;
+  regex: RegExp;
 }
 
 export const Input: React.FC<Props> = ({
@@ -25,7 +28,11 @@ export const Input: React.FC<Props> = ({
   required,
   register,
   errors,
+  requiredMsg,
+  errorMsg,
+  regex,
 }) => {
+  console.log(errors);
   return (
     <div className="w-full relative">
       {formatPrice && (
@@ -43,7 +50,20 @@ export const Input: React.FC<Props> = ({
         ${formatPrice ? "pl-9" : "pl-4"}
         ${errors[id] ? "border-blue-900" : "border-neutral-300"}
         ${errors[id] ? "focus:border-blue-900" : "focus:border-black"}`}
-        {...register(id, { required })}
+        {...register(id, {
+          required: requiredMsg,
+          pattern: {
+            value: regex,
+            message: errorMsg,
+          },
+        })}
+        //  {...register("organizationName", {
+        //   required: "Organization name is required.",
+        //   pattern: {
+        //     value: /^[a-zA-Z0-9\s]+$/,
+        //     message: "Only letters, numbers and spaces allowed",
+        //   },
+        // })}
       />
       <label
         className={`absolute text-md duration-150 transform -translate-y-3 top-[1.1rem] z-10 origin-[0] ${
@@ -54,6 +74,7 @@ export const Input: React.FC<Props> = ({
       >
         {label}
       </label>
+      {errors[id] && <div>{`${errors[id]?.message}`}</div>}
     </div>
   );
 };

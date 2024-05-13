@@ -19,7 +19,7 @@ import {
   MdOutlineSportsSoccer,
   MdOutlineVilla,
 } from "react-icons/md";
-import { FaRegMoneyBill1 } from "react-icons/fa6";
+import { FaPersonShelter, FaRegMoneyBill1 } from "react-icons/fa6";
 import { CategoryBox } from "./CategoryBox";
 import { usePathname, useSearchParams } from "next/navigation";
 import { FaSkiing } from "react-icons/fa";
@@ -30,6 +30,11 @@ import { PiChalkboardTeacherLight } from "react-icons/pi";
 import { SiHomebridge } from "react-icons/si";
 
 export const categories = [
+  {
+    label: "Izvidjači",
+    icon: FaPersonShelter,
+    description: "Izvidjači - Avantura, učenje i prijateljstvo u prirodi..",
+  },
   {
     label: "Sport",
     icon: MdOutlineSportsSoccer,
