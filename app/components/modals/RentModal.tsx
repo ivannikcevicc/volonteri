@@ -15,7 +15,7 @@ import { Input } from "../inputs/input";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Range } from "react-date-range";
+import { PiArrowsOutLineHorizontal } from "react-icons/pi";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -27,8 +27,9 @@ enum STEPS {
   CATEGORY = 0,
   LOCATION = 1,
   INFO = 2,
-  IMAGES = 3,
-  DESCRIPTION = 4,
+  ORGANIZATION = 3,
+  IMAGES = 4,
+  DESCRIPTION = 5,
 }
 
 export const RentModal = () => {
@@ -53,13 +54,23 @@ export const RentModal = () => {
       price: 1,
       title: "",
       description: "",
+      organizationName: "",
+      postLink: "",
+      email: "",
+      phoneNumber: "",
+      organizationLink: "",
+      flag: "",
     },
   });
   const category = watch("category");
   const location = watch("location");
   const peopleCount = watch("peopleCount");
   const imageSrc = watch("imageSrc");
-  const jobTime = watch("jobTime");
+  const organizationName = watch("organizationName");
+  const postLink = watch("postLink");
+  const email = watch("email");
+  const phoneNumber = watch("phoneNumber");
+  const organizationLink = watch("organizationLink");
   const Map = useMemo(
     () =>
       dynamic(() => import("../map"), {
@@ -192,6 +203,67 @@ export const RentModal = () => {
           onChange={(value) => setCustomValue("peopleCount", value)}
         />
         <hr />
+      </div>
+    );
+  }
+
+  if (step === STEPS.ORGANIZATION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Organization Information"
+          subtitle="Provide valid data about your organization."
+        />
+        {/* organizationName: "",
+      postLink: "",
+      email: "",
+      phoneNumber: "",
+      organizationLink: "", */}
+        <Input
+          id="organizationName"
+          label="Organization Name"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="organizationLink"
+          label="Link to the organization"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="postLink"
+          label="Link to the post"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <hr />
+        <Heading
+          title="Contact Information"
+          subtitle="Where volunteers can reach you."
+        />
+        <Input
+          id="email"
+          label="Email"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="phoneNumber"
+          label="Phone Number"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
       </div>
     );
   }

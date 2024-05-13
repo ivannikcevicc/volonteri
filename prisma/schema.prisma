@@ -57,6 +57,11 @@ model Job {
   lat String?
   lng String?
   countryName String?
+  organizationName String?
+  postLink String?
+  email String?
+  phoneNumber String?
+  organizationLink String?
   flag String?
   userId String @db.ObjectId
   peopleCount Int
