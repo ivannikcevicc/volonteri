@@ -3,14 +3,14 @@ import { Country, City } from "country-state-city";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useMemo } from "react";
 import Image from "next/image";
-import { SafeReservation, SafeUser } from "@/app/types";
+import { SafeApplication, SafeUser } from "@/app/types";
 import { HeartButton } from "../HeartButton";
 import { Button } from "../button";
-import { Job } from "@prisma/client";
+import { Application, Job } from "@prisma/client";
 
 interface Props {
   data: Job;
-  reservation?: SafeReservation;
+  application?: Application & { job: Job };
   onAction?: (id: string) => void;
   disabled?: boolean;
   actionLabel?: string;

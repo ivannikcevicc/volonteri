@@ -1,6 +1,6 @@
 import { EmptyState } from "../components/EmptyState";
 import getCurrentUser from "../actions/getCurrentUser";
-import getReservations from "../actions/getReservations";
+import getApplications from "../actions/getApplications";
 import { TripsClient } from "./TripsClient";
 
 const TripsPage = async () => {
@@ -11,9 +11,9 @@ const TripsPage = async () => {
     );
   }
 
-  const reservations = await getReservations({ userId: currentUser.id });
+  const applications = await getApplications({ userId: currentUser.id });
 
-  if (reservations.length === 0) {
+  if (applications.length === 0) {
     return (
       <EmptyState
         title="No trips found"
@@ -21,6 +21,6 @@ const TripsPage = async () => {
       ></EmptyState>
     );
   }
-  return <TripsClient reservations={reservations} currentUser={currentUser} />;
+  return <TripsClient applications={applications} currentUser={currentUser} />;
 };
 export default TripsPage;

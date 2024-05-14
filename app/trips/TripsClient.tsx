@@ -1,19 +1,20 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
-import { SafeReservation, SafeUser } from "../types";
+import { SafeUser } from "../types";
 import Container from "../components/container";
 import { Heading } from "../components/heading";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ListingCard } from "../components/listings/ListingCard";
+import { Application, Job } from "@prisma/client";
 
 interface Props {
-  reservations: SafeReservation[];
+  applications: (Application & { job: Job })[];
   currentUser?: SafeUser | null;
 }
-export const TripsClient = ({ reservations, currentUser }: Props) => {
+export const TripsClient = ({ applications, currentUser }: Props) => {
   const router = useRouter();
 
   const [deletingId, setDeletingId] = useState("");
@@ -21,9 +22,9 @@ export const TripsClient = ({ reservations, currentUser }: Props) => {
     (id: string) => {
       setDeletingId(id);
       axios
-        .delete(`/api/reservations/${id}`)
+        .delete(`/api/applications/${id}`)
         .then(() => {
-          toast.success(`Reservations cancelled.`);
+          toast.success(`applications cancelled.`);
           router.refresh();
         })
         .catch((error) => {
@@ -42,16 +43,15 @@ export const TripsClient = ({ reservations, currentUser }: Props) => {
         subtitle="Where you've been and where you're going"
       />
       <div className="grid mt-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        {reservations.map((reservation) => (
+        {applications.map((application) => (
           <ListingCard
-            key={reservation.id}
-            reservation={reservation}
-            //@ts-ignore
-            data={reservation.listing}
-            actionId={reservation.id}
+            key={application.id}
+            application={application}
+            data={application.job}
+            actionId={application.id}
             onAction={onCancel}
-            disabled={deletingId === reservation.id}
-            actionLabel="Cancel Reservation"
+            disabled={deletingId === application.id}
+            actionLabel="Cancel application"
             currentUser={currentUser}
           />
         ))}

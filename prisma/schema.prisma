@@ -47,6 +47,7 @@ model Account {
 }
 
 model Job {
+  userId String @db.ObjectId
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   description String
@@ -63,7 +64,7 @@ model Job {
   phoneNumber String?
   organizationLink String?
   flag String?
-  userId String @db.ObjectId
+  
   peopleCount Int
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -82,5 +83,5 @@ model Application {
   createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Job Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  job Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
 }

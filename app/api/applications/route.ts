@@ -11,27 +11,29 @@ export async function POST(request: Request) {
 
   const body = await request.json();
 
-  const { listingId, startDate, endDate, totalPrice } = body;
+  const { jobId, fileUrl, name, email, phoneNumber, expirience } = body;
 
-  if (!listingId || !totalPrice || !startDate || !endDate) {
+  if (!jobId || !fileUrl || !name || !email || !phoneNumber || !expirience) {
     return NextResponse.error();
   }
 
-  const listingAndReservation = await prismadb.job.update({
+  const jobAndApplication = await prismadb.job.update({
     where: {
-      id: listingId,
+      id: jobId,
     },
     data: {
-      reservations: {
+      applications: {
         create: {
           userId: currentUser.id,
-          startDate: startDate,
-          endDate: endDate,
-          totalPrice: totalPrice,
+          fileUrl: fileUrl,
+          name: name,
+          email: email,
+          phoneNumber: phoneNumber,
+          expirience: expirience,
         },
       },
     },
   });
 
-  return NextResponse.json(listingAndReservation);
+  return NextResponse.json(jobAndApplication);
 }

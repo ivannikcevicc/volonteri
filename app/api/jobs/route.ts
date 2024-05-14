@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     description,
   } = body;
 
-  const listing = await prismadb.job.create({
+  const job = await prismadb.job.create({
     data: {
       title,
       description,
@@ -49,5 +49,5 @@ export async function POST(request: Request) {
     },
   });
 
-  return NextResponse.json(listing);
+  return NextResponse.json(job);
 }
