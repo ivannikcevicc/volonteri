@@ -1,12 +1,12 @@
 import prismadb from "../libs/prismadb";
 
 interface Props {
-  listingId: string;
+  jobId: string;
 }
 
 export default async function getJobById(params: Props) {
   try {
-    const { listingId: jobId } = params;
+    const { jobId: jobId } = params;
 
     const job = await prismadb.job.findUnique({
       where: {
@@ -26,6 +26,8 @@ export default async function getJobById(params: Props) {
       user: {
         ...job.user,
         emailVerified: job.user.emailVerified?.toISOString() || null,
+        createdAt: job.user.createdAt.toISOString(),
+        updatedAt: job.user.updatedAt.toISOString(),
       },
     };
   } catch (err: any) {
