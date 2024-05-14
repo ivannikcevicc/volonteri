@@ -7,7 +7,7 @@ import { Heading } from "../components/heading";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { ListingCard } from "../components/listings/ListingCard";
+import { JobCard } from "../components/jobs/JobCard";
 import { Application, Job } from "@prisma/client";
 
 interface Props {
@@ -44,7 +44,7 @@ export const TripsClient = ({ applications, currentUser }: Props) => {
       />
       <div className="grid mt-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
         {applications.map((application) => (
-          <ListingCard
+          <JobCard
             key={application.id}
             application={application}
             data={application.job}

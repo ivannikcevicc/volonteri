@@ -7,14 +7,14 @@ import { Heading } from "../components/heading";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { ListingCard } from "../components/listings/ListingCard";
+import { JobCard } from "../components/jobs/JobCard";
 import { Job } from "@prisma/client";
 
 interface Props {
-  listings: Job[];
+  jobs: Job[];
   currentUser?: SafeUser | null;
 }
-export const PropertiesClient = ({ listings, currentUser }: Props) => {
+export const PropertiesClient = ({ jobs, currentUser }: Props) => {
   const router = useRouter();
 
   const [deletingId, setDeletingId] = useState("");
@@ -22,9 +22,9 @@ export const PropertiesClient = ({ listings, currentUser }: Props) => {
     (id: string) => {
       setDeletingId(id);
       axios
-        .delete(`/api/listings/${id}`)
+        .delete(`/api/jobs/${id}`)
         .then(() => {
-          toast.success(`Listing deleted.`);
+          toast.success(`Job deleted.`);
           router.refresh();
         })
         .catch((error) => {
@@ -40,13 +40,13 @@ export const PropertiesClient = ({ listings, currentUser }: Props) => {
     <Container>
       <Heading title="Properties" subtitle="List of your properties" />
       <div className="grid mt-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        {listings.map((listing) => (
-          <ListingCard
-            key={listing.id}
-            data={listing}
-            actionId={listing.id}
+        {jobs.map((job) => (
+          <JobCard
+            key={job.id}
+            data={job}
+            actionId={job.id}
             onAction={onCancel}
-            disabled={deletingId === listing.id}
+            disabled={deletingId === job.id}
             actionLabel="Delete property"
             currentUser={currentUser}
           />

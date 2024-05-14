@@ -11,9 +11,9 @@ const PropertiesPage = async () => {
     );
   }
 
-  const listings = await getJobs({ userId: currentUser.id });
+  const jobs = await getJobs({ userId: currentUser.id });
 
-  if (listings.length === 0) {
+  if (jobs.length === 0) {
     return (
       <EmptyState
         title="No properties found"
@@ -21,6 +21,6 @@ const PropertiesPage = async () => {
       ></EmptyState>
     );
   }
-  return <PropertiesClient listings={listings} currentUser={currentUser} />;
+  return <PropertiesClient jobs={jobs} currentUser={currentUser} />;
 };
 export default PropertiesPage;
