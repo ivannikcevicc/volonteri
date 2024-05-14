@@ -216,6 +216,9 @@ export const ProfileModal = ({ currentUser }: Props) => {
         register={register}
         errors={errors}
         required
+        regex={/^[a-zA-Z0-9\s]+$/}
+        requiredMsg="Name is required."
+        errorMsg="Only letters, numbers and spaces allowed"
       />
     </div>
   );

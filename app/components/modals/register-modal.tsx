@@ -64,6 +64,9 @@ export const RegisterModal = () => {
         register={register}
         errors={errors}
         required
+        regex={/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/}
+        requiredMsg="Email is required."
+        errorMsg="Please enter a valid email address"
       />
       <Input
         id="name"
@@ -72,6 +75,9 @@ export const RegisterModal = () => {
         register={register}
         errors={errors}
         required
+        regex={/^[a-zA-Z0-9\s]+$/}
+        requiredMsg="Name is required."
+        errorMsg="Only letters, numbers and spaces allowed"
       />
       <Input
         id="password"
@@ -81,6 +87,9 @@ export const RegisterModal = () => {
         register={register}
         errors={errors}
         required
+        regex={/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/}
+        requiredMsg="Name is required."
+        errorMsg="Only letters, numbers and spaces allowed"
       />
     </div>
   );
