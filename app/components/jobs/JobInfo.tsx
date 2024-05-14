@@ -3,7 +3,7 @@ import { LocationValue, SafeUser } from "@/app/types";
 import React from "react";
 import { IconType } from "react-icons";
 import { Avatar } from "../avatar";
-import { ListingCategory } from "./ListingCategory";
+import { JobCategory } from "./JobCategory";
 import dynamic from "next/dynamic";
 
 const Map = dynamic(() => import("../map"), {
@@ -23,7 +23,7 @@ interface Props {
   locationValue: LocationValue;
 }
 
-export const ListingInfo = ({
+export const JobInfo = ({
   user,
   description,
   category,
@@ -44,7 +44,7 @@ export const ListingInfo = ({
       </div>
       <hr />
       {category && (
-        <ListingCategory
+        <JobCategory
           icon={category.icon}
           label={category.label}
           description={category.description}

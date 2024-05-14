@@ -14,7 +14,7 @@ interface Props {
   currentUser: SafeUser | null;
 }
 
-export const ListingHead = ({
+export const JobHead = ({
   title,
   locationValue,
   imageSrc,
@@ -36,7 +36,7 @@ export const ListingHead = ({
           className="object-cover w-full"
         />
         <div className="absolute top-5 right-5">
-          <HeartButton listingId={id} currentUser={currentUser} />
+          <HeartButton jobId={id} currentUser={currentUser} />
         </div>
       </div>
     </>

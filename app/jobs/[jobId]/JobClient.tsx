@@ -1,26 +1,28 @@
 "use client";
 
 import Container from "@/app/components/container";
-import { ListingHead } from "@/app/components/listings/ListingHead";
-import { ListingInfo } from "@/app/components/listings/ListingInfo";
-import { ListingReservation } from "@/app/components/listings/ListingReservation";
+import { JobHead } from "@/app/components/jobs/JobHead";
+import { JobInfo } from "@/app/components/jobs/JobInfo";
+import { JobReservation } from "@/app/components/jobs/JobReservation";
 import { categories } from "@/app/components/navbar/Categories";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
+import { SafeUser } from "@/app/types";
+import { Job } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 
 interface Props {
-  // listing: Job & {
-  //   user: SafeUser;
-  // };
-  listing: any;
-  // currentUser: SafeUser | null;
-  currentUser: any;
+  job: Job & {
+    user: SafeUser;
+  };
+  // job: any;
+  currentUser: SafeUser | null;
+  // currentUser: any;
 }
 
-export const ListingClient = ({ listing, currentUser }: Props) => {
+export const JobClient = ({ job, currentUser }: Props) => {
   const loginModal = useLoginModal();
   const router = useRouter();
 
@@ -32,11 +34,11 @@ export const ListingClient = ({ listing, currentUser }: Props) => {
     setIsLoading(true);
 
     axios
-      .post("/api/reservations", {
-        listingId: listing.id,
+      .post("/api/applications", {
+        jobId: job.id,
       })
       .then(() => {
-        toast.success("Listing reserved!");
+        toast.success("Job application submitted!");
         //redirect to /trips
         router.refresh();
       })
@@ -46,40 +48,40 @@ export const ListingClient = ({ listing, currentUser }: Props) => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [listing?.id, currentUser, router, loginModal]);
+  }, [currentUser, job.id, loginModal, router]);
 
   const category = useMemo(() => {
-    return categories.find((item) => item.label === listing.category);
-  }, [listing.category]);
+    return categories.find((item) => item.label === job.category);
+  }, [job.category]);
 
   const locationValue = {
-    cityName: listing.cityName,
-    countryName: listing.countryName,
-    lat: listing.lat,
-    lng: listing.lng,
-    flag: listing.flag,
+    cityName: job.cityName,
+    countryName: job.countryName,
+    lat: job.lat,
+    lng: job.lng,
+    flag: job.flag,
   };
 
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
         <div className="flex flex-col gap-6">
-          <ListingHead
-            title={listing.title}
-            imageSrc={listing.imageSrc}
+          <JobHead
+            title={job.title}
+            imageSrc={job.imageSrc}
             locationValue={locationValue}
-            id={listing.id}
+            id={job.id}
             currentUser={currentUser}
           />
           <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
-            <ListingInfo
-              user={listing.user}
+            <JobInfo
+              user={job.user}
               category={category}
-              description={listing.description}
+              description={job.description}
               locationValue={locationValue}
             />
             <div className="order-first mb-10 md:order-last md:col-span-3">
-              <ListingReservation
+              <JobReservation
                 onSubmit={onCreateReservation}
                 disabled={isLoading}
               />

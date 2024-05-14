@@ -8,7 +8,7 @@ interface Props {
   description: string;
 }
 
-export const ListingCategory = ({ icon: Icon, label, description }: Props) => {
+export const JobCategory = ({ icon: Icon, label, description }: Props) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-row items-center gap-4">

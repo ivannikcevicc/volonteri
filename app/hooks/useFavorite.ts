@@ -7,18 +7,18 @@
 // import { roundToNearestHours } from "date-fns/fp/roundToNearestHours";
 
 // interface Props {
-//   listingId: string;
+//   jobId: string;
 //   currentUser?: SafeUser | null;
 // }
 
-// const useFavorite = ({ currentUser, listingId }: Props) => {
+// const useFavorite = ({ currentUser, jobId }: Props) => {
 //   const router = useRouter();
 //   const loginModal = useLoginModal();
 
 //   const hasFavorited = useMemo(() => {
 //     const list = currentUser?.favoriteIds || [];
-//     return list.includes(listingId);
-//   }, [currentUser, listingId]);
+//     return list.includes(jobId);
+//   }, [currentUser, jobId]);
 
 //   const toggleFavorite = useCallback(
 //     async (e: React.MouseEvent<HTMLDivElement>) => {
@@ -28,9 +28,9 @@
 //       try {
 //         let request;
 //         if (hasFavorited) {
-//           request = () => axios.delete(`/api/favorites/${listingId}`);
+//           request = () => axios.delete(`/api/favorites/${jobId}`);
 //         } else {
-//           request = () => axios.post(`/api/favorites/${listingId}`);
+//           request = () => axios.post(`/api/favorites/${jobId}`);
 //         }
 
 //         await request();
@@ -41,7 +41,7 @@
 //         toast.error("Error Favoriting");
 //       }
 //     },
-//     [currentUser, hasFavorited, listingId, loginModal, router]
+//     [currentUser, hasFavorited, jobId, loginModal, router]
 //   );
 
 //   return { hasFavorited, toggleFavorite };
@@ -57,16 +57,16 @@ import { SafeUser } from "../types";
 import { useLoginModal } from "./useLoginModal";
 
 interface Props {
-  listingId: string;
+  jobId: string;
   currentUser?: SafeUser | null;
 }
 
-const useFavorite = ({ currentUser, listingId }: Props) => {
+const useFavorite = ({ currentUser, jobId }: Props) => {
   const router = useRouter();
   const loginModal = useLoginModal();
   const [hasFavorited, setHasFavorited] = useState(() => {
     const list = currentUser?.favoriteIds || [];
-    return list.includes(listingId);
+    return list.includes(jobId);
   });
 
   const toggleFavorite = useCallback(
@@ -77,8 +77,8 @@ const useFavorite = ({ currentUser, listingId }: Props) => {
       try {
         // Optimistically update the UI
         const updatedFavorites = hasFavorited
-          ? currentUser.favoriteIds.filter((id) => id !== listingId)
-          : [...currentUser.favoriteIds, listingId];
+          ? currentUser.favoriteIds.filter((id) => id !== jobId)
+          : [...currentUser.favoriteIds, jobId];
 
         // Update the currentUser's favoriteIds based on the action (add or remove)
         currentUser.favoriteIds = updatedFavorites;
@@ -88,9 +88,9 @@ const useFavorite = ({ currentUser, listingId }: Props) => {
 
         // Make the request to the server
         if (hasFavorited) {
-          await axios.delete(`/api/favorites/${listingId}`);
+          await axios.delete(`/api/favorites/${jobId}`);
         } else {
-          await axios.post(`/api/favorites/${listingId}`);
+          await axios.post(`/api/favorites/${jobId}`);
         }
 
         toast.success(
@@ -102,7 +102,7 @@ const useFavorite = ({ currentUser, listingId }: Props) => {
         toast.error("Error favoriting");
       }
     },
-    [currentUser, hasFavorited, listingId, loginModal]
+    [currentUser, hasFavorited, jobId, loginModal]
   );
 
   return { hasFavorited, toggleFavorite };

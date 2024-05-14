@@ -1,6 +1,4 @@
 "use client";
-
-import { Range } from "react-date-range";
 import { Button } from "../button";
 
 interface Props {
@@ -8,7 +6,7 @@ interface Props {
   disabled?: boolean;
 }
 
-export const ListingReservation = ({ onSubmit, disabled }: Props) => {
+export const JobReservation = ({ onSubmit, disabled }: Props) => {
   return (
     <div className="bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden">
       <div className="flex flex-row items-center gap-1 p-4">
@@ -18,7 +16,7 @@ export const ListingReservation = ({ onSubmit, disabled }: Props) => {
       </div>
       <hr />
       <div className="p-4">
-        <Button disabled={disabled} label={"Reserve"} onClick={onSubmit} />
+        <Button disabled={disabled} label={"Apply"} onClick={onSubmit} />
       </div>
       <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
         aaaa

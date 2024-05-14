@@ -18,7 +18,7 @@ interface Props {
   currentUser?: SafeUser | null;
 }
 
-export const ListingCard = ({
+export const JobCard = ({
   data,
   onAction,
   disabled,
@@ -27,7 +27,6 @@ export const ListingCard = ({
   currentUser,
 }: Props) => {
   const router = useRouter();
-  console.log(data);
 
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,7 +38,7 @@ export const ListingCard = ({
   );
   return (
     <div
-      onClick={() => router.push(`listings/${data.id}`)}
+      onClick={() => router.push(`jobs/${data.id}`)}
       className="col-span-1 cursor-pointer group"
     >
       <div className="flex flex-col gap-2 w-full">
@@ -52,7 +51,7 @@ export const ListingCard = ({
           />
           <div className="absolute top-3 right-3">
             <HeartButton
-              listingId={data.id}
+              jobId={data.id}
               currentUser={currentUser}
             ></HeartButton>
           </div>
