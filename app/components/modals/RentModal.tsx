@@ -77,6 +77,7 @@ export const RentModal = () => {
       dynamic(() => import("../map"), {
         ssr: false,
       }),
+    //eslint-disable-next-line
     [location]
   );
 
