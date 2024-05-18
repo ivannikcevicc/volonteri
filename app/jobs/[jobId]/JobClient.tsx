@@ -5,11 +5,13 @@ import { JobHead } from "@/app/components/jobs/JobHead";
 import { JobInfo } from "@/app/components/jobs/JobInfo";
 import { JobReservation } from "@/app/components/jobs/JobReservation";
 import { categories } from "@/app/components/navbar/Categories";
+import { useApplicationModal } from "@/app/hooks/useApplicationModal";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
+import { useRentModal } from "@/app/hooks/useRentModal";
 import { SafeUser } from "@/app/types";
 import { Job } from "@prisma/client";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -23,32 +25,9 @@ interface Props {
 }
 
 export const JobClient = ({ job, currentUser }: Props) => {
+  const applicationModal = useApplicationModal();
   const loginModal = useLoginModal();
-  const router = useRouter();
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onCreateReservation = useCallback(() => {
-    if (!currentUser) return loginModal.onOpen();
-
-    setIsLoading(true);
-
-    axios
-      .post("/api/applications", {
-        jobId: job.id,
-      })
-      .then(() => {
-        toast.success("Job application submitted!");
-        //redirect to /trips
-        router.refresh();
-      })
-      .catch((error) => {
-        toast.error("Something went wrong");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [currentUser, job.id, loginModal, router]);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const category = useMemo(() => {
     return categories.find((item) => item.label === job.category);
@@ -82,8 +61,11 @@ export const JobClient = ({ job, currentUser }: Props) => {
             />
             <div className="order-first mb-10 md:order-last md:col-span-3">
               <JobReservation
-                onSubmit={onCreateReservation}
-                disabled={isLoading}
+                onSubmit={() => {
+                  if (!currentUser) return loginModal.onOpen();
+                  applicationModal.onOpen();
+                }}
+                // disabled={isLoading}
               />
             </div>
           </div>

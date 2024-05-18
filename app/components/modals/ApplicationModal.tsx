@@ -16,28 +16,22 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { PiArrowsOutLineHorizontal } from "react-icons/pi";
-
-const initialDateRange = {
-  startDate: new Date(),
-  endDate: new Date(),
-  key: "selection",
-};
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import { TextArea } from "../inputs/textarea";
 
 enum STEPS {
-  CATEGORY = 0,
-  LOCATION = 1,
-  INFO = 2,
-  ORGANIZATION = 3,
-  CONTACT = 4,
-  IMAGES = 5,
-  DESCRIPTION = 6,
+  CREDS = 0,
+  EXPIRIENCE = 1,
+  ABOUT = 2,
+  CV = 3,
 }
 
-export const ApplicationModal = ({ pathname }: { pathname: string }) => {
+export const ApplicationModal = () => {
   const applicationModal = useApplicationModal();
-  const [step, setStep] = useState(STEPS.CATEGORY);
+  const [step, setStep] = useState(STEPS.CREDS);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const {
     register,
@@ -48,30 +42,16 @@ export const ApplicationModal = ({ pathname }: { pathname: string }) => {
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
-      category: "",
-      location: undefined,
-      peopleCount: 1,
-      imageSrc: "",
-      price: 1,
-      title: "",
-      description: "",
-      organizationName: "",
-      postLink: "",
+      name: "",
       email: "",
       phoneNumber: "",
-      organizationLink: "",
-      flag: "",
+      expirience: "",
+      about: "",
+      fileUrl: "",
     },
   });
   const category = watch("category");
   const location = watch("location");
-  const peopleCount = watch("peopleCount");
-  const imageSrc = watch("imageSrc");
-  const organizationName = watch("organizationName");
-  const postLink = watch("postLink");
-  const email = watch("email");
-  const phoneNumber = watch("phoneNumber");
-  const organizationLink = watch("organizationLink");
   const Map = useMemo(
     () =>
       dynamic(() => import("../map"), {
@@ -96,10 +76,8 @@ export const ApplicationModal = ({ pathname }: { pathname: string }) => {
     setStep((value) => value + 1);
   };
 
-  console.log("aaaa", pathname.split("/").pop());
-
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    if (step !== STEPS.DESCRIPTION) {
+    if (step !== STEPS.CV) {
       return onNext();
     }
 
@@ -107,7 +85,7 @@ export const ApplicationModal = ({ pathname }: { pathname: string }) => {
     axios
       .post("/api/applications", {
         ...data,
-        jobId: pathname.split("/").pop(),
+        jobId: pathname?.split("/").pop(),
       })
       .then(() => {
         toast.success("Listing created!");
@@ -115,7 +93,7 @@ export const ApplicationModal = ({ pathname }: { pathname: string }) => {
         /// resets the form in react-hook-form
         reset();
 
-        setStep(STEPS.CATEGORY);
+        setStep(STEPS.CREDS);
         applicationModal.onClose();
       })
       .catch(() => {
@@ -127,7 +105,7 @@ export const ApplicationModal = ({ pathname }: { pathname: string }) => {
   };
 
   const actionLabel = useMemo(() => {
-    if (step === STEPS.DESCRIPTION) {
+    if (step === STEPS.CV) {
       return "Create";
     }
 
@@ -135,7 +113,7 @@ export const ApplicationModal = ({ pathname }: { pathname: string }) => {
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
-    if (step === STEPS.CATEGORY) {
+    if (step === STEPS.CREDS) {
       return undefined;
     }
     return "Back";
@@ -162,95 +140,23 @@ export const ApplicationModal = ({ pathname }: { pathname: string }) => {
     </div>
   );
 
-  if (step === STEPS.LOCATION) {
-    let mapCenter = undefined; // Default center if location is not available
-
-    if (location && location.lat && location.lng) {
-      mapCenter = [location.lat, location.lng]; // Use location's lat and lng if available
-    }
+  if (step === STEPS.CREDS) {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Where is your place located?"
-          subtitle="Help guests find you!"
+          title="Kontakt informacije"
+          subtitle="Gdje poslodavci mogu da vas kontaktiraju."
         />
-        <CountrySelect
-          value={location}
-          onChange={(value) => setCustomValue("location", value)}
-        />
-        <Map center={mapCenter}></Map>
-      </div>
-    );
-  }
-
-  if (step === STEPS.INFO) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="Share some basics about your place"
-          subtitle="What amenities do you have?"
-        />
-        <Counter
-          title="Volunteers"
-          subtitle="How many volunteers do you allow?"
-          value={peopleCount}
-          onChange={(value) => setCustomValue("peopleCount", value)}
-        />
-        <hr />
-      </div>
-    );
-  }
-
-  if (step === STEPS.ORGANIZATION) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="Organization Information"
-          subtitle="Provide valid data about your organization."
-        />
-        <hr />
         <Input
-          id="organizationName"
-          label="Organization Name"
+          id="name"
+          label="Vaše ime"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
           regex={/^[a-zA-Z0-9\s]+$/}
-          requiredMsg="Organization name is required."
-          errorMsg="Only letters, numbers and spaces allowed"
-        />
-        <Input
-          id="organizationLink"
-          label="Link to the organization"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-          regex={/^https?:\/\/.+$/}
-          requiredMsg="Link to the organization is required."
-          errorMsg="Please enter a valid URL"
-        />
-        <Input
-          id="postLink"
-          label="Link to the post"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-          regex={/^https?:\/\/.+$/}
-          requiredMsg="Link to an external post is required."
-          errorMsg="Please enter a valid URL"
-        />
-      </div>
-    );
-  }
-  if (step === STEPS.CONTACT) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="Contact Information"
-          subtitle="Where volunteers can reach you."
+          requiredMsg="Ime je obavezno."
+          errorMsg="Samo slova, brojevi i razmaci su dozvoljeni."
         />
         <hr />
         <Input
@@ -261,68 +167,77 @@ export const ApplicationModal = ({ pathname }: { pathname: string }) => {
           errors={errors}
           required
           regex={/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/}
-          requiredMsg="Email is required."
-          errorMsg="Please enter a valid email address"
+          requiredMsg="Email obavezan."
+          errorMsg="Upišite validnu e-mail adresu"
         />
         <Input
           id="phoneNumber"
-          label="Phone Number"
+          label="Broj telefona"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
           regex={/(\+)?(\(?\d+\)?)(([\s-]+)?(\d+)){0,13}/}
-          requiredMsg="Phone Number is required."
-          errorMsg="Please enter a valid phone number. Try the + operator"
+          requiredMsg="Broj telefona je obavezan"
+          errorMsg="Unesite ispravan broj telefona. Pokušajte da upišete + format"
         />
       </div>
     );
   }
-
-  if (step === STEPS.IMAGES) {
+  if (step === STEPS.EXPIRIENCE) {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Add a photo of your place"
-          subtitle="Show guests what your place looks like!"
+          title="Vaše iskustvo"
+          subtitle="Vaše prijašnje iskustvo sa volonterskim poslovanjem."
         />
-        <ImageUpload
-          onChange={(value) => setCustomValue("imageSrc", value)}
-          value={imageSrc}
-        />
-      </div>
-    );
-  }
-  if (step === STEPS.DESCRIPTION) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="How would you describe your place?"
-          subtitle="Short and sweet works best!"
-        />
-        <Input
-          id="title"
-          label="Title"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-          regex={/^[a-zA-Z0-9\s]+$/}
-          requiredMsg="Title is required."
-          errorMsg="Please enter a valid title."
-        />
-        <hr />
-        <Input
+        <TextArea
           id="description"
-          label="Description"
+          label="Opis"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
           regex={/[\s\S]*/}
-          requiredMsg="Description is required."
-          errorMsg="Please enter a valid description."
+          requiredMsg="Iskustvo je obavezno."
+          errorMsg="Upišite validno iskustvo."
         />
+      </div>
+    );
+  }
+
+  if (step === STEPS.ABOUT) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="O vama"
+          subtitle="Navedite neke informacije o vama i vašem ličnom životu."
+        />
+        <TextArea
+          id="about"
+          label="O vama"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+          regex={/[\s\S]*/}
+          requiredMsg="Opis je obavezan."
+          errorMsg="Upišite validan opis."
+        />
+        <hr />
+      </div>
+    );
+  }
+
+  if (step === STEPS.CV) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="CV (Opcionalno)"
+          subtitle="Dodajte CV ukoliko ga imate."
+        />
+        {/* CV form */}
+        <hr />
       </div>
     );
   }
@@ -335,7 +250,7 @@ export const ApplicationModal = ({ pathname }: { pathname: string }) => {
       title="Post your Job!"
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
-      secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
+      secondaryAction={step === STEPS.CV ? undefined : onBack}
       body={bodyContent}
     ></Modal>
   );

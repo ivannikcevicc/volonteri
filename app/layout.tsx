@@ -11,6 +11,7 @@ import SearchModal from "./components/modals/SearchModal";
 import { Suspense } from "react";
 import Loader from "./components/loader";
 import { ProfileModal } from "./components/modals/ProfileModal";
+import { ApplicationModal } from "./components/modals/ApplicationModal";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default async function RootLayout({
           <ToasterProvider />
           <SearchModal />
           <RegisterModal />
+          <ApplicationModal />
           <LoginModal />
           <RentModal />
           <Navbar currentUser={currentUser} />

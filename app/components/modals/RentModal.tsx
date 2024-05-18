@@ -67,11 +67,6 @@ export const RentModal = () => {
   const location = watch("location");
   const peopleCount = watch("peopleCount");
   const imageSrc = watch("imageSrc");
-  const organizationName = watch("organizationName");
-  const postLink = watch("postLink");
-  const email = watch("email");
-  const phoneNumber = watch("phoneNumber");
-  const organizationLink = watch("organizationLink");
   const Map = useMemo(
     () =>
       dynamic(() => import("../map"), {

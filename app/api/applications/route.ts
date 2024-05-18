@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
   const body = await request.json();
 
-  const { jobId, fileUrl, name, email, phoneNumber, expirience } = body;
+  const { jobId, fileUrl, name, email, phoneNumber, expirience, about } = body;
 
   if (!jobId || !fileUrl || !name || !email || !phoneNumber || !expirience) {
     return NextResponse.error();
@@ -30,6 +30,7 @@ export async function POST(request: Request) {
           email: email,
           phoneNumber: phoneNumber,
           expirience: expirience,
+          about: about,
         },
       },
     },
