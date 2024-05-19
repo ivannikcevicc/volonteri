@@ -12,7 +12,7 @@ import { Suspense } from "react";
 import Loader from "./components/loader";
 import { ProfileModal } from "./components/modals/ProfileModal";
 import { ApplicationModal } from "./components/modals/ApplicationModal";
-
+import { EdgeStoreProvider } from "./libs/edgestore";
 const font = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -33,17 +33,19 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Suspense fallback={<Loader />}>
-          <ProfileModal currentUser={currentUser} />
-          <ToasterProvider />
-          <SearchModal />
-          <RegisterModal />
-          <ApplicationModal />
-          <LoginModal />
-          <RentModal />
-          <Navbar currentUser={currentUser} />
-          <div className="pt-24">{children}</div>
-        </Suspense>
+        <EdgeStoreProvider>
+          <Suspense fallback={<Loader />}>
+            <ProfileModal currentUser={currentUser} />
+            <ToasterProvider />
+            <SearchModal />
+            <RegisterModal />
+            <ApplicationModal />
+            <LoginModal />
+            <RentModal />
+            <Navbar currentUser={currentUser} />
+            <div className="pt-24">{children}</div>
+          </Suspense>
+        </EdgeStoreProvider>
       </body>
     </html>
   );

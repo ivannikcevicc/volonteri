@@ -18,6 +18,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { PiArrowsOutLineHorizontal } from "react-icons/pi";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import { TextArea } from "../inputs/textarea";
+import FileUpload from "../inputs/FileUpload";
 
 enum STEPS {
   CREDS = 0,
@@ -236,7 +237,7 @@ export const ApplicationModal = () => {
           title="CV (Opcionalno)"
           subtitle="Dodajte CV ukoliko ga imate."
         />
-        {/* CV form */}
+        <FileUpload />
         <hr />
       </div>
     );
