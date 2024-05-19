@@ -93,6 +93,7 @@ export const ApplicationModal = () => {
         router.refresh();
         /// resets the form in react-hook-form
         reset();
+        console.log(data);
 
         setStep(STEPS.CREDS);
         applicationModal.onClose();
@@ -193,7 +194,7 @@ export const ApplicationModal = () => {
           subtitle="Vaše prijašnje iskustvo sa volonterskim poslovanjem."
         />
         <TextArea
-          id="description"
+          id="expirience"
           label="Opis"
           disabled={isLoading}
           register={register}
@@ -237,7 +238,7 @@ export const ApplicationModal = () => {
           title="CV (Opcionalno)"
           subtitle="Dodajte CV ukoliko ga imate."
         />
-        <FileUpload />
+        <FileUpload setValue={setValue} />
         <hr />
       </div>
     );

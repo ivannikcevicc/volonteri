@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
   const { jobId, fileUrl, name, email, phoneNumber, expirience, about } = body;
 
-  if (!jobId || !fileUrl || !name || !email || !phoneNumber || !expirience) {
+  if (!jobId || !name || !email || !phoneNumber || !expirience) {
     return NextResponse.error();
   }
 

@@ -4,17 +4,24 @@ import { useEdgeStore } from "@/app/libs/edgestore";
 import { useState } from "react";
 import Link from "next/link";
 import { MdOutlineDriveFolderUpload } from "react-icons/md";
+import { FaFileArchive } from "react-icons/fa";
 
-export default function Page() {
+interface FileUploadProps {
+  setValue: (name: string, value: any) => void;
+}
+
+export default function FileUpload({ setValue }: FileUploadProps) {
   const [file, setFile] = React.useState<File>();
   const { edgestore } = useEdgeStore();
-  const [url, setUrl] = useState<string | null>();
+  const [url, setUrl] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
+  const [error, setError] = useState("");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError("");
     const selectedFile = e.target.files?.[0];
     setFile(selectedFile);
-    console.log("Selected file:", selectedFile); // Debug: Check if file is set
+    console.log("Selected file:", file); // Debug: Check if file is set
   };
 
   const handleUpload = async () => {
@@ -34,8 +41,10 @@ export default function Page() {
 
       console.log("Upload response:", res.url); // Debug: Check the response
       setUrl(res.url);
+      setValue("fileUrl", res.url);
     } catch (error) {
-      console.error("Upload failed:", error); // Debug: Check for errors
+      console.error("Upload failed:", error);
+      setError("Fajl je preveliki. Max 15MB"); // Debug: Check for errors
     }
   };
 
@@ -55,19 +64,25 @@ export default function Page() {
           htmlFor="files"
           className="w-full h-[20vh] border-2 bg-gradient-to-t from-green-200 to-transparent rounded-lg border-black flex flex-col items-center justify-center"
         >
-          <div className="flex flex-col items-center justify-center gap-2 ">
-            <MdOutlineDriveFolderUpload size={50} />
-            <span>Izaberi Datoteku</span>
+          <div className="flex flex-col items-center justify-center gap-2 text-center">
+            {file ? (
+              <FaFileArchive size={50} />
+            ) : (
+              <MdOutlineDriveFolderUpload size={50} />
+            )}
+            <span>{file ? file.name : "Izaberi Datoteku"}</span>
           </div>
         </label>
         <button
           onClick={handleUpload}
-          className={` border-2 text-black border-black  relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-full py-2 `}
+          className={`${
+            error ? "border-red-500" : ""
+          } border-2 text-black border-black  relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-full py-2 `}
           style={{
             backgroundImage: `linear-gradient(to right, #10B981 ${progress}%, #fff ${progress}%)`,
           }}
         >
-          Upload
+          {error ? error : "Upload"}
         </button>
       </div>
       {url && (
