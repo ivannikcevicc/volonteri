@@ -24,6 +24,8 @@ export async function POST(request: Request) {
     organizationLink,
     peopleCount,
     imageSrc,
+    formLink,
+    required,
     title,
     description,
   } = body;
@@ -42,6 +44,8 @@ export async function POST(request: Request) {
       organizationName,
       postLink,
       email,
+      formLink,
+      required,
       phoneNumber,
       organizationLink,
       userId: currentUser.id,

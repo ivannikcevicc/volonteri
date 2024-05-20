@@ -9,7 +9,7 @@ import { useApplicationModal } from "@/app/hooks/useApplicationModal";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
 import { useRentModal } from "@/app/hooks/useRentModal";
 import { SafeUser } from "@/app/types";
-import { Job } from "@prisma/client";
+import { Application, Job } from "@prisma/client";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
@@ -21,10 +21,11 @@ interface Props {
   };
   // job: any;
   currentUser: SafeUser | null;
+  applications: Application[]
   // currentUser: any;
 }
 
-export const JobClient = ({ job, currentUser }: Props) => {
+export const JobClient = ({ job, currentUser, applications }: Props) => {
   const applicationModal = useApplicationModal();
   const loginModal = useLoginModal();
   // const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +66,7 @@ export const JobClient = ({ job, currentUser }: Props) => {
                   if (!currentUser) return loginModal.onOpen();
                   applicationModal.onOpen();
                 }}
+                applications={applications}
                 // disabled={isLoading}
               />
             </div>

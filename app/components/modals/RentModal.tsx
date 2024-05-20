@@ -30,7 +30,9 @@ enum STEPS {
   ORGANIZATION = 3,
   CONTACT = 4,
   IMAGES = 5,
-  DESCRIPTION = 6,
+  FORM = 6,
+  REQUIRED = 7,
+  DESCRIPTION = 8,
 }
 
 export const RentModal = () => {
@@ -59,6 +61,8 @@ export const RentModal = () => {
       postLink: "",
       email: "",
       phoneNumber: "",
+      formLink: "",
+      required: "",
       organizationLink: "",
       flag: "",
     },
@@ -208,42 +212,42 @@ export const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Organization Information"
-          subtitle="Provide valid data about your organization."
+          title="Informacije o organizaciji"
+          subtitle="Unesite validne informacije o organizaciji."
         />
         <hr />
         <Input
           id="organizationName"
-          label="Organization Name"
+          label="Ime organizacije"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
           regex={/^[a-zA-Z0-9\s]+$/}
-          requiredMsg="Organization name is required."
-          errorMsg="Only letters, numbers and spaces allowed"
+          requiredMsg="Ime je obavezno."
+          errorMsg="Slova, brojevi i razmaci su dozvoljeni."
         />
         <Input
           id="organizationLink"
-          label="Link to the organization"
+          label="Link od organizacije (websajt, drustvene mreze...)"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
           regex={/^https?:\/\/.+$/}
-          requiredMsg="Link to the organization is required."
-          errorMsg="Please enter a valid URL"
+          requiredMsg="Link je obavezan."
+          errorMsg="Unesite validan link."
         />
         <Input
           id="postLink"
-          label="Link to the post"
+          label="Link od objave posla na eksternoj platformi"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
           regex={/^https?:\/\/.+$/}
-          requiredMsg="Link to an external post is required."
-          errorMsg="Please enter a valid URL"
+          requiredMsg="Link je obavezan."
+          errorMsg="Unesite validan link."
         />
       </div>
     );
@@ -252,8 +256,8 @@ export const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Contact Information"
-          subtitle="Where volunteers can reach you."
+          title="Kontakt informacije"
+          subtitle="Gdje volonteri mogu da vas nađu?"
         />
         <hr />
         <Input
@@ -264,19 +268,19 @@ export const RentModal = () => {
           errors={errors}
           required
           regex={/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/}
-          requiredMsg="Email is required."
-          errorMsg="Please enter a valid email address"
+          requiredMsg="Email je obavezan."
+          errorMsg="Molimo vas unesite validnu email adresu."
         />
         <Input
           id="phoneNumber"
-          label="Phone Number"
+          label="Broj telefona"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
           regex={/(\+)?(\(?\d+\)?)(([\s-]+)?(\d+)){0,13}/}
-          requiredMsg="Phone Number is required."
-          errorMsg="Please enter a valid phone number. Try the + operator"
+          requiredMsg="Broj telefona je obavezan."
+          errorMsg="Molimo vas unesite validan broj telefona. Pokušajte (+123 12 312 312) format"
         />
       </div>
     );
@@ -286,8 +290,8 @@ export const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Add a photo of your place"
-          subtitle="Show guests what your place looks like!"
+          title="Dodajte slike vašeg posla"
+          subtitle="Slike od prijašnjih dogadjaja i organizacija ili slično."
         />
         <ImageUpload
           onChange={(value) => setCustomValue("imageSrc", value)}
@@ -296,35 +300,77 @@ export const RentModal = () => {
       </div>
     );
   }
-  if (step === STEPS.DESCRIPTION) {
+  if (step === STEPS.FORM) {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="How would you describe your place?"
-          subtitle="Short and sweet works best!"
+          title="Link do online forme za prijavu (opcionalno)"
+          subtitle="Za one koji prijave prihvataju preko online formi."
         />
         <Input
-          id="title"
-          label="Title"
+          id="formLink"
+          label="Link do forme"
           disabled={isLoading}
           register={register}
           errors={errors}
-          required
-          regex={/^[a-zA-Z0-9\s]+$/}
-          requiredMsg="Title is required."
-          errorMsg="Please enter a valid title."
+          regex={/^https?:\/\/.+$/}
+          requiredMsg="Link je obavezan."
+          errorMsg="Unesite validan link."
         />
-        <hr />
+      </div>
+    );
+  }
+  if (step === STEPS.REQUIRED) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Obavezne informacije za prijavu."
+          subtitle="Navedite šta sve korisnici moraju da navedu u poruci za prijavu."
+        />
         <Input
-          id="description"
-          label="Description"
+          id="required"
+          label="Opis"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
           regex={/[\s\S]*/}
-          requiredMsg="Description is required."
-          errorMsg="Please enter a valid description."
+          requiredMsg="Opis je obavezan."
+          errorMsg="Unesite validan opis."
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Naslov posla"
+          subtitle="Kratko i jasno služi najbolje."
+        />
+        <Input
+          id="title"
+          label="Naslov"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+          regex={/^[a-zA-Z0-9\s]+$/}
+          requiredMsg="Naslov je obavezan."
+          errorMsg="Please enter a valid title."
+        />
+        <hr />
+        <Input
+          id="description"
+          label="Opis"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+          regex={/[\s\S]*/}
+          requiredMsg="Opis je obavezan."
+          errorMsg="Unesite validan opis."
         />
       </div>
     );

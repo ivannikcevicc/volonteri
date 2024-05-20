@@ -7,16 +7,10 @@ import { Heading } from "../heading";
 import { categories } from "../navbar/Categories";
 import { CategoryInput } from "../inputs/CategoryInput";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { CountrySelect } from "../inputs/CountrySelect";
-import dynamic from "next/dynamic";
-import { Counter } from "../inputs/Counter";
-import { ImageUpload } from "../inputs/ImageUpload";
 import { Input } from "../inputs/input";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { usePathname, useRouter } from "next/navigation";
-import { PiArrowsOutLineHorizontal } from "react-icons/pi";
-import getCurrentUser from "@/app/actions/getCurrentUser";
 import { TextArea } from "../inputs/textarea";
 import FileUpload from "../inputs/FileUpload";
 
@@ -52,16 +46,6 @@ export const ApplicationModal = () => {
     },
   });
   const category = watch("category");
-  const location = watch("location");
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("../map"), {
-        ssr: false,
-      }),
-    //eslint-disable-next-line
-    [location]
-  );
-
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,

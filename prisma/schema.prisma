@@ -61,6 +61,8 @@ model Job {
   organizationName String?
   postLink String?
   email String?
+  formLink String?
+  required String?
   phoneNumber String?
   organizationLink String?
   flag String?
