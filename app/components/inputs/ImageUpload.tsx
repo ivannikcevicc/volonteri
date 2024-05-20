@@ -32,6 +32,9 @@ export const ImageUpload = ({
       uploadPreset="dovhko1b"
       options={{
         maxFiles: 1,
+        cropping: true,
+        resourceType: "image",
+        croppingAspectRatio: 4 / 4,
       }}
     >
       {({ open }) => {

@@ -74,19 +74,19 @@ const NavbarItems = ({ pathname, currentUser }: Props) => {
   const rentModal = useRentModal();
   const NavItems = [
     {
-      label: "Home Page",
+      label: "Naslovna",
       route: "/",
       key: "home",
       onClick: undefined,
     },
     {
-      label: "About Us",
+      label: "O nama",
       route: "/about",
       key: "about",
       onClick: undefined,
     },
     {
-      label: "Post a Job",
+      label: "Objavi posao",
       route: "/post",
       key: "post",
       onClick: () => {

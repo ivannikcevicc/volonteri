@@ -184,9 +184,9 @@ export const ApplicationModal = () => {
           register={register}
           errors={errors}
           required
-          regex={/[\s\S]*/}
+          regex={/[\s\S]{0,300}/}
           requiredMsg="Iskustvo je obavezno."
-          errorMsg="Upišite validno iskustvo."
+          errorMsg="Upišite validno iskustvo. (300 karaktera)"
         />
       </div>
     );
@@ -206,9 +206,9 @@ export const ApplicationModal = () => {
           register={register}
           errors={errors}
           required
-          regex={/[\s\S]*/}
+          regex={/[\s\S]{0,300}/}
           requiredMsg="Opis je obavezan."
-          errorMsg="Upišite validan opis."
+          errorMsg="Upišite validan opis. (300 karaktera)"
         />
         <hr />
       </div>

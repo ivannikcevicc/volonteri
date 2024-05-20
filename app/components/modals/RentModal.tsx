@@ -194,12 +194,12 @@ export const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Share some basics about your place"
-          subtitle="What amenities do you have?"
+          title="Broj volontera"
+          subtitle="Koliki je maksimalan procjenjen broj volontera koje prihvatate za navedeni posao?"
         />
         <Counter
-          title="Volunteers"
-          subtitle="How many volunteers do you allow?"
+          title="Broj volontera"
+          subtitle="Maksimalan procjenjen broj volontera"
           value={peopleCount}
           onChange={(value) => setCustomValue("peopleCount", value)}
         />
@@ -334,9 +334,9 @@ export const RentModal = () => {
           register={register}
           errors={errors}
           required
-          regex={/[\s\S]*/}
+          regex={/[\s\S]{0,300}/}
           requiredMsg="Opis je obavezan."
-          errorMsg="Unesite validan opis."
+          errorMsg="Unesite validan opis.(300 karaktera)"
         />
       </div>
     );
@@ -368,9 +368,9 @@ export const RentModal = () => {
           register={register}
           errors={errors}
           required
-          regex={/[\s\S]*/}
+          regex={/[\s\S]{0,300}/}
           requiredMsg="Opis je obavezan."
-          errorMsg="Unesite validan opis."
+          errorMsg="Unesite validan opis. (300 karaktera)"
         />
       </div>
     );

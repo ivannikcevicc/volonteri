@@ -16,6 +16,7 @@ export const Avatar = ({ src, height = "30", width = "30" }: Props) => {
       height={height}
       width={width}
       alt="Avatar"
+      objectFit={"contain"}
       src={src || "/placeholder.webp"}
     ></Image>
   );
