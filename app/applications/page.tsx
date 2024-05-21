@@ -9,7 +9,12 @@ const ApplicationsPage = async () => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return <EmptyState title="Unauthorized" subtitle="Please Login" />;
+    return (
+      <EmptyState
+        title="Niste prijavljeni"
+        subtitle="Molimo vas da se prijavite."
+      />
+    );
   }
 
   const applications = await getApplications({
@@ -19,8 +24,8 @@ const ApplicationsPage = async () => {
   if (applications.length === 0) {
     return (
       <EmptyState
-        title="No Applications found"
-        subtitle="Looks like you haven't applied to anything"
+        title="Nema prijava."
+        subtitle="Izgleda da se nigdje niste prijavili."
       />
     );
   }

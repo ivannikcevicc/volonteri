@@ -7,6 +7,7 @@ import { SafeApplication, SafeUser } from "@/app/types";
 import { HeartButton } from "../HeartButton";
 import { Button } from "../button";
 import { Application, Job } from "@prisma/client";
+import { Span } from "next/dist/trace";
 
 interface Props {
   data: Job;
@@ -72,7 +73,14 @@ export const JobCard = ({
         <div className="font-semibold text-lg">
           {data.cityName}, {data.countryName}
         </div>
-        <div className="flex flex-row items-center gap-1">aaaaaaaaaaa</div>
+        <div className="flex flex-row items-center gap-1">
+          aaaaaaaaaaa{" "}
+          {currentUser?.id === data.userId && (
+            <span className="py-[.15rem] px-[.6rem] text-[.8rem] rounded-full bg-green-500 text-white">
+              Vaše
+            </span>
+          )}
+        </div>
         {secondaryAction && secondaryActionLabel && (
           <Button
             disabled={disabled}

@@ -21,6 +21,7 @@ export const InformationModal: React.FC<Props> = ({
   applicationId,
   jobId,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const informationModal = useInformationModal();
   const [application, setApplication] = useState<Application | null>(null);
   const [job, setJob] = useState<Job | null>(null);
@@ -83,15 +84,90 @@ export const InformationModal: React.FC<Props> = ({
           <div className="flex items-center gap-2">
             Ime: {user?.name || application.name} <Avatar src={user?.image} />
           </div>
-          <div>Email: {user?.email || application.email}</div>
-          <div>Telefon: {application.phoneNumber}</div>
+          <div>
+            Email:{" "}
+            <a
+              href={`mailto:${application.email}`}
+              className="text-blue-600 underline"
+            >
+              {application.email}
+            </a>
+          </div>
+          <div>
+            Telefon:{" "}
+            <a
+              href={`tel:${application.phoneNumber}`}
+              className="text-blue-600 underline"
+            >
+              {application.phoneNumber}
+            </a>
+          </div>
+          {application.fileUrl && (
+            <div>
+              CV:{" "}
+              <a
+                href={`${application.fileUrl}`}
+                className="text-blue-600 underline"
+              >
+                {application.fileUrl}
+              </a>
+            </div>
+          )}
           <hr />
-          <div>Iskustvo: {application.expirience}</div>
-          <div>O meni: {application.expirience}</div>
+          <div className="text-wrap break-words sm:text-base text-[.75rem]">
+            Iskustvo: {application.expirience}
+          </div>
+          <div className="text-wrap break-words sm:text-base text-[.75rem]">
+            O meni: {application.expirience}
+          </div>
           <div>Datum prijave: {formatDate(application.createdAt)}</div>
         </>
       )}
-      {job && <div>Job Details: {/* Render job details here */}</div>}
+      {job && (
+        <>
+          <div className="flex  flex-col gap-2">
+            <div>Naslov: {job?.title}</div>
+            <div className="flex items-center gap-2">
+              Autor: {user?.name} <Avatar src={user?.image} />
+            </div>
+            <div>
+              Mjesto: {job?.countryName}, {job?.cityName}
+            </div>
+            <div>Kategorija: {job?.category}</div>
+          </div>
+          <hr />
+          <div>
+            Link do objave:{" "}
+            <a href={`${job.postLink}`} className="text-blue-600 underline">
+              {job.postLink}
+            </a>
+          </div>
+          <div>
+            Link do organizacije:{" "}
+            <a
+              href={`${job.organizationLink}`}
+              className="text-blue-600 underline"
+            >
+              {job.organizationLink}
+            </a>
+          </div>
+          <div>
+            Telefon:{" "}
+            <a
+              href={`tel:${job.phoneNumber}`}
+              className="text-blue-600 underline"
+            >
+              {job.phoneNumber}
+            </a>
+          </div>
+          <hr />
+          <div className="text-wrap break-words sm:text-base text-[.75rem]">
+            {" "}
+            Opis: {job.description}
+          </div>
+          <div>Datum objave: {formatDate(job.createdAt)}</div>
+        </>
+      )}
     </div>
   );
 
@@ -99,6 +175,7 @@ export const InformationModal: React.FC<Props> = ({
     <Modal
       onClose={informationModal.onClose}
       onSubmit={onSubmit}
+      disabled={isLoading}
       isOpen={informationModal.isOpen}
       title="Informacije"
       actionLabel={actionLabel}

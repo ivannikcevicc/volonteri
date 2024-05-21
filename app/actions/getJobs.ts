@@ -93,6 +93,7 @@ export default async function getJobs(params: JobProps) {
 
     const jobs = await prismadb.job.findMany({
       where: {
+        userId: where.userId,
         cityName: where.cityName,
         category: where.category,
       },

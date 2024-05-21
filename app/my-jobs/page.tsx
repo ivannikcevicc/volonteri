@@ -7,7 +7,10 @@ const MyJobsPage = async () => {
   const currentUser = await getCurrentUser();
   if (!currentUser) {
     return (
-      <EmptyState title="Unauthorized" subtitle="Please login"></EmptyState>
+      <EmptyState
+        title="Niste prijavljeni"
+        subtitle="Molimo vas, prijavite se"
+      ></EmptyState>
     );
   }
 

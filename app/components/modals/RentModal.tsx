@@ -119,7 +119,6 @@ export const RentModal = () => {
       .then(() => {
         toast.success("Listing created!");
         router.refresh();
-        /// resets the form in react-hook-form
         reset();
 
         setStep(STEPS.CATEGORY);
@@ -381,6 +380,7 @@ export const RentModal = () => {
       onClose={rentModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       isOpen={rentModal.isOpen}
+      disabled={isLoading}
       title="Post your Job!"
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}

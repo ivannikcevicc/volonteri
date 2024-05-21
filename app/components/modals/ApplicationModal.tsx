@@ -230,6 +230,7 @@ export const ApplicationModal = () => {
 
   return (
     <Modal
+      disabled={isLoading}
       onClose={applicationModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       isOpen={applicationModal.isOpen}
