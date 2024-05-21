@@ -70,7 +70,9 @@ export const InformationModal: React.FC<Props> = ({
     fetchData();
   }, [applicationId, jobId, application?.userId, job?.userId]);
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    informationModal.onClose();
+  };
 
   const formatDate = (date: Date): string => {
     return new Date(date).toLocaleDateString();
