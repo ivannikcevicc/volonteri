@@ -3,9 +3,11 @@ import { EmptyState } from "../components/EmptyState";
 import getCurrentUser from "../actions/getCurrentUser";
 import { ApplicationsClient } from "./ApplicationsClient";
 import getApplications from "../actions/getApplications";
+import { useCallback, useState } from "react";
 
 const ApplicationsPage = async () => {
   const currentUser = await getCurrentUser();
+
   if (!currentUser) {
     return <EmptyState title="Unauthorized" subtitle="Please Login" />;
   }

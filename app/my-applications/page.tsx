@@ -1,9 +1,9 @@
 import { EmptyState } from "../components/EmptyState";
 import getCurrentUser from "../actions/getCurrentUser";
 import getApplications from "../actions/getApplications";
-import { TripsClient } from "./TripsClient";
+import { MyApplicationsClient } from "./MyApplicationsClient";
 
-const TripsPage = async () => {
+const MyApplicationsPage = async () => {
   const currentUser = await getCurrentUser();
   if (!currentUser) {
     return (
@@ -21,6 +21,11 @@ const TripsPage = async () => {
       ></EmptyState>
     );
   }
-  return <TripsClient applications={applications} currentUser={currentUser} />;
+  return (
+    <MyApplicationsClient
+      applications={applications}
+      currentUser={currentUser}
+    />
+  );
 };
-export default TripsPage;
+export default MyApplicationsPage;

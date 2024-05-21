@@ -12,8 +12,10 @@ interface Props {
   data: Job;
   application?: Application & { job: Job };
   onAction?: (id: string) => void;
+  secondaryAction?: (id: string) => void;
   disabled?: boolean;
   actionLabel?: string;
+  secondaryActionLabel?: string;
   actionId?: string;
   currentUser?: SafeUser | null;
 }
@@ -23,6 +25,8 @@ export const JobCard = ({
   onAction,
   disabled,
   actionLabel,
+  secondaryActionLabel,
+  secondaryAction,
   actionId = "",
   currentUser,
 }: Props) => {
@@ -35,6 +39,15 @@ export const JobCard = ({
       onAction?.(actionId);
     },
     [onAction, actionId, disabled]
+  );
+
+  const handleSubmit = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      if (disabled) return;
+      secondaryAction?.(actionId);
+    },
+    [secondaryAction, actionId, disabled]
   );
   return (
     <div
@@ -60,10 +73,19 @@ export const JobCard = ({
           {data.cityName}, {data.countryName}
         </div>
         <div className="flex flex-row items-center gap-1">aaaaaaaaaaa</div>
+        {secondaryAction && secondaryActionLabel && (
+          <Button
+            disabled={disabled}
+            small
+            label={secondaryActionLabel}
+            onClick={handleSubmit}
+          />
+        )}
         {onAction && actionLabel && (
           <Button
             disabled={disabled}
             small
+            outline
             label={actionLabel}
             onClick={handleCancel}
           />

@@ -6,7 +6,7 @@ interface Props {
   authorId?: string;
 }
 
-export default async function getReservations(params: Props) {
+export default async function getApplications(params: Props) {
   try {
     const { jobId, userId, authorId } = params;
     const query: any = {};

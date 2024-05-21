@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { JobCard } from "../components/jobs/JobCard";
-import { Job } from "@prisma/client";
+import { Application, Job } from "@prisma/client";
 
 interface Props {
-  jobs: Job[];
+  applications: (Application & { job: Job })[];
   currentUser?: SafeUser | null;
 }
-export const PropertiesClient = ({ jobs, currentUser }: Props) => {
+export const MyApplicationsClient = ({ applications, currentUser }: Props) => {
   const router = useRouter();
 
   const [deletingId, setDeletingId] = useState("");
@@ -22,9 +22,9 @@ export const PropertiesClient = ({ jobs, currentUser }: Props) => {
     (id: string) => {
       setDeletingId(id);
       axios
-        .delete(`/api/jobs/${id}`)
+        .delete(`/api/applications/${id}`)
         .then(() => {
-          toast.success(`Job deleted.`);
+          toast.success(`applications cancelled.`);
           router.refresh();
         })
         .catch((error) => {
@@ -38,16 +38,20 @@ export const PropertiesClient = ({ jobs, currentUser }: Props) => {
   );
   return (
     <Container>
-      <Heading title="Properties" subtitle="List of your properties" />
+      <Heading
+        title="Vaše prijave"
+        subtitle="Poslovi na koje ste se prijavili."
+      />
       <div className="grid mt-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        {jobs.map((job) => (
+        {applications.map((application) => (
           <JobCard
-            key={job.id}
-            data={job}
-            actionId={job.id}
+            key={application.id}
+            application={application}
+            data={application.job}
+            actionId={application.id}
             onAction={onCancel}
-            disabled={deletingId === job.id}
-            actionLabel="Delete property"
+            disabled={deletingId === application.id}
+            actionLabel="Otkaži prijavu"
             currentUser={currentUser}
           />
         ))}

@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { JobCard } from "../components/jobs/JobCard";
-import { Application, Job } from "@prisma/client";
+import { Job } from "@prisma/client";
 
 interface Props {
-  applications: (Application & { job: Job })[];
+  jobs: Job[];
   currentUser?: SafeUser | null;
 }
-export const TripsClient = ({ applications, currentUser }: Props) => {
+export const MyJobsClient = ({ jobs, currentUser }: Props) => {
   const router = useRouter();
 
   const [deletingId, setDeletingId] = useState("");
@@ -22,9 +22,9 @@ export const TripsClient = ({ applications, currentUser }: Props) => {
     (id: string) => {
       setDeletingId(id);
       axios
-        .delete(`/api/applications/${id}`)
+        .delete(`/api/jobs/${id}`)
         .then(() => {
-          toast.success(`applications cancelled.`);
+          toast.success(`Job deleted.`);
           router.refresh();
         })
         .catch((error) => {
@@ -38,20 +38,16 @@ export const TripsClient = ({ applications, currentUser }: Props) => {
   );
   return (
     <Container>
-      <Heading
-        title="Trips"
-        subtitle="Where you've been and where you're going"
-      />
+      <Heading title="Poslovi" subtitle="Lista vaših poslova." />
       <div className="grid mt-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        {applications.map((application) => (
+        {jobs.map((job) => (
           <JobCard
-            key={application.id}
-            application={application}
-            data={application.job}
-            actionId={application.id}
+            key={job.id}
+            data={job}
+            actionId={job.id}
             onAction={onCancel}
-            disabled={deletingId === application.id}
-            actionLabel="Cancel application"
+            disabled={deletingId === job.id}
+            actionLabel="Delete property"
             currentUser={currentUser}
           />
         ))}

@@ -70,29 +70,29 @@ export const UserMenu = ({ currentUser }: Props) => {
               <>
                 <MenuItem onClick={profileModal.onOpen} label="Edit profile" />
                 <MenuItem
-                  onClick={() => router.push("/trips")}
-                  label="My trips"
+                  onClick={() => router.push("/my-applications")}
+                  label="Moje prijave"
                 />
                 <MenuItem
                   onClick={() => router.push("/favorites")}
-                  label="My favorites"
+                  label="Moje omiljeno"
                 />
                 <MenuItem
-                  onClick={() => router.push("/reservations")}
-                  label="My reservations"
+                  onClick={() => router.push("/applications")}
+                  label="Prijave korisnika"
                 />
                 <MenuItem
-                  onClick={() => router.push("/properties")}
-                  label="My properties"
+                  onClick={() => router.push("/my-jobs")}
+                  label="Moji poslovi"
                 />
-                <MenuItem onClick={rentModal.onOpen} label="Airbnb my home" />
+                <MenuItem onClick={rentModal.onOpen} label="Objavi posao" />
                 <hr />
-                <MenuItem onClick={() => signOut()} label="Log out" />
+                <MenuItem onClick={() => signOut()} label="Odjava" />
               </>
             ) : (
               <>
-                <MenuItem onClick={loginModal.onOpen} label="Log in" />
-                <MenuItem onClick={registerModal.onOpen} label="Sign up" />
+                <MenuItem onClick={loginModal.onOpen} label="Prijava" />
+                <MenuItem onClick={registerModal.onOpen} label="Registracija" />
               </>
             )}
           </div>

@@ -1,9 +1,9 @@
 import { EmptyState } from "../components/EmptyState";
 import getCurrentUser from "../actions/getCurrentUser";
 import getJobs from "../actions/getJobs";
-import { PropertiesClient } from "./PropertiesClient";
+import { MyJobsClient } from "./MyJobsClient";
 
-const PropertiesPage = async () => {
+const MyJobsPage = async () => {
   const currentUser = await getCurrentUser();
   if (!currentUser) {
     return (
@@ -16,11 +16,11 @@ const PropertiesPage = async () => {
   if (jobs.length === 0) {
     return (
       <EmptyState
-        title="No properties found"
-        subtitle="Looks like you have no properties yet"
+        title="Nema objavljenih poslova"
+        subtitle="Izgleda da niste objavljivali poslove."
       ></EmptyState>
     );
   }
-  return <PropertiesClient jobs={jobs} currentUser={currentUser} />;
+  return <MyJobsClient jobs={jobs} currentUser={currentUser} />;
 };
-export default PropertiesPage;
+export default MyJobsPage;

@@ -12,9 +12,6 @@ export const Search = () => {
 
   const cityName = params?.get("cityName");
   console.log(cityName);
-  // const startDate = params?.get("startDate");
-  // const endDate = params?.get("endDate");
-
   const locationLabel = useMemo(() => {
     if (cityName) {
       return `${cityName}`;
@@ -23,21 +20,6 @@ export const Search = () => {
     return "Anywhere";
   }, [cityName]);
 
-  // const durationLabel = useMemo(() => {
-  //   if (startDate && endDate) {
-  //     const start = new Date(startDate as string);
-  //     const end = new Date(endDate as string);
-  //     let diff = differenceInDays(end, start);
-
-  //     if (diff === 0) {
-  //       diff = 1;
-  //     }
-
-  //     return `${diff} days`;
-  //   }
-  //   return "Anytime";
-  // }, [startDate, endDate]);
-
   return (
     <div
       onClick={searchModal.onOpen}
@@ -45,9 +27,6 @@ export const Search = () => {
     >
       <div className="flex flex-row items-center justify-between">
         <div className="text-sm font-semibold px-6">{locationLabel}</div>
-        {/* <div className="hidden sm:block font-semibold text-sm px-6 border-x-[1px] flex-1 text-center">
-          {durationLabel}
-        </div> */}
         <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
           <div className="p-2 bg-green-800 rounded-full text-white">
             <BiSearch size={18} />

@@ -4,23 +4,6 @@ import { useRouter } from "next/navigation";
 
 import React from "react";
 
-// export const Logo = () => {
-//   const router = useRouter();
-//   return (
-//     <Image
-//       onClick={() => {
-//         router.push("/");
-//         router.refresh();
-//       }}
-//       alt="Logo Volonteri"
-//       className="hidden md:block cursor-pointer"
-//       height={"50"}
-//       width={"70"}
-//       src="/logo.png"
-//     ></Image>
-//   );
-// };
-
 export const Logo = () => {
   const router = useRouter();
   return (

@@ -26,3 +26,23 @@ export async function DELETE(request: Request, { params }: { params: Props }) {
 
   return NextResponse.json(application);
 }
+
+export async function GET(request: Request, { params }: { params: Props }) {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) {
+    return NextResponse.error();
+  }
+
+  const { applicationId } = params;
+  if (!applicationId || typeof applicationId !== "string") {
+    throw new Error("Invalid ID");
+  }
+
+  const application = await prismadb.application.findUnique({
+    where: {
+      id: applicationId,
+    },
+  });
+
+  return NextResponse.json(application);
+}

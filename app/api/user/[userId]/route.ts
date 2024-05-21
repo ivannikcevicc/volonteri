@@ -32,3 +32,23 @@ export async function PATCH(request: Request, { params }: { params: Props }) {
     return new NextResponse("Internal error", { status: 500 });
   }
 }
+
+export async function GET(request: Request, { params }: { params: Props }) {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) {
+    return NextResponse.error();
+  }
+
+  const { userId } = params;
+  if (!userId || typeof userId !== "string") {
+    throw new Error("Invalid ID");
+  }
+
+  const user = await prismadb.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
+  return NextResponse.json(user);
+}

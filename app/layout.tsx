@@ -13,6 +13,7 @@ import Loader from "./components/loader";
 import { ProfileModal } from "./components/modals/ProfileModal";
 import { ApplicationModal } from "./components/modals/ApplicationModal";
 import { EdgeStoreProvider } from "./libs/edgestore";
+import { InformationModal } from "./components/modals/InformationModal";
 const font = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
