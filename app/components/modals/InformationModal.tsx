@@ -21,7 +21,6 @@ export const InformationModal: React.FC<Props> = ({
   applicationId,
   jobId,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const informationModal = useInformationModal();
   const [application, setApplication] = useState<Application | null>(null);
   const [job, setJob] = useState<Job | null>(null);
@@ -177,7 +176,6 @@ export const InformationModal: React.FC<Props> = ({
     <Modal
       onClose={informationModal.onClose}
       onSubmit={onSubmit}
-      disabled={isLoading}
       isOpen={informationModal.isOpen}
       title="Informacije"
       actionLabel={actionLabel}
