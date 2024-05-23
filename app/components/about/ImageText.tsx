@@ -13,6 +13,10 @@ interface Props {
   invert?: boolean;
   buttonLabel?: string;
   onClick?: () => void;
+  tip1: string;
+  tip2: string;
+  tip3: string;
+  tip4: string;
 }
 
 const ImageText = ({
@@ -23,6 +27,10 @@ const ImageText = ({
   tag = "Volonteri",
   buttonLabel,
   onClick,
+  tip1,
+  tip2,
+  tip3,
+  tip4,
 }: Props) => {
   return (
     <div
@@ -52,12 +60,12 @@ const ImageText = ({
         <p className="text-lg sm:text-xl">{subtitle}</p>
         <div className="flex flex-col sm:flex-row [&>*:nth-child(odd)]:pr-0 sm:[&>*:nth-child(odd)]:pr-10 [&>*:nth-child(even)]:pl-0 sm:[&>*:nth-child(even)]:pl-10 divide-y-2 sm:divide-x-2 sm:divide-y-0 divide-gray-400 py-0 sm:py-2">
           <div className="flex items-start flex-col gap-2 font-semibold py-4">
-            <Tip text="Lorem ipsum dolor" />
-            <Tip text="Lorem ipsum dolor" />
+            <Tip text={tip1} />
+            <Tip text={tip2} />
           </div>
           <div className="flex items-start flex-col gap-2 font-semibold py-4">
-            <Tip text="Lorem ipsum dolor" />
-            <Tip text="Lorem ipsum dolor" />
+            <Tip text={tip3} />
+            <Tip text={tip4} />
           </div>
         </div>
         {buttonLabel && onClick && (

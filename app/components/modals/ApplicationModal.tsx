@@ -13,6 +13,8 @@ import toast from "react-hot-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { TextArea } from "../inputs/textarea";
 import FileUpload from "../inputs/FileUpload";
+import { User } from "@prisma/client";
+import { SafeUser } from "@/app/types";
 
 enum STEPS {
   CREDS = 0,
@@ -21,7 +23,11 @@ enum STEPS {
   CV = 3,
 }
 
-export const ApplicationModal = () => {
+export const ApplicationModal = ({
+  currentUser,
+}: {
+  currentUser: SafeUser | null;
+}) => {
   const applicationModal = useApplicationModal();
   const [step, setStep] = useState(STEPS.CREDS);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,8 +43,8 @@ export const ApplicationModal = () => {
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
-      name: "",
-      email: "",
+      name: `${currentUser?.name ? `${currentUser?.name}` : ""}`,
+      email: `${currentUser?.email ? `${currentUser?.email}` : ""}`,
       phoneNumber: "",
       expirience: "",
       about: "",
