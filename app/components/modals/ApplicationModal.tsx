@@ -79,7 +79,7 @@ export const ApplicationModal = ({
         jobId: pathname?.split("/").pop(),
       })
       .then(() => {
-        toast.success("Listing created!");
+        toast.success("Prijava poslata!");
         router.refresh();
         /// resets the form in react-hook-form
         reset();

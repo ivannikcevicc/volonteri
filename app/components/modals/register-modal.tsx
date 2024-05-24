@@ -39,12 +39,12 @@ export const RegisterModal = () => {
     axios
       .post("/api/register", data)
       .then(() => {
-        toast.success("Success!");
+        toast.success("Registracija uspješna!");
         registerModal.onClose();
         loginModal.onOpen();
       })
       .catch((error) => {
-        toast.error("Something went wrong");
+        toast.error("Greška prilikom registracije");
       })
       .finally(() => setIsLoading(false));
   };
@@ -56,7 +56,7 @@ export const RegisterModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Welcome to Airbnb!" subtitle="Create an Account!" />
+      <Heading title="Dobrodošli u Volontere!" subtitle="Kreirajte nalog!" />
       <Input
         id="email"
         label="Email"
@@ -65,8 +65,8 @@ export const RegisterModal = () => {
         errors={errors}
         required
         regex={/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/}
-        requiredMsg="Email is required."
-        errorMsg="Please enter a valid email address"
+        requiredMsg="Email je obavezan."
+        errorMsg="Unesite validnu email adresu"
       />
       <Input
         id="name"
@@ -76,8 +76,8 @@ export const RegisterModal = () => {
         errors={errors}
         required
         regex={/^[a-zA-Z0-9\s]+$/}
-        requiredMsg="Name is required."
-        errorMsg="Only letters, numbers and spaces allowed"
+        requiredMsg="Ime je obavezno."
+        errorMsg="Samo slova, brojevi i razmaci su dozvoljeni."
       />
       <Input
         id="password"
@@ -88,8 +88,8 @@ export const RegisterModal = () => {
         errors={errors}
         required
         regex={/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/}
-        requiredMsg="Name is required."
-        errorMsg="Only letters, numbers and spaces allowed"
+        requiredMsg="Šifra je obavezna."
+        errorMsg="Samo slova, brojevi i razmaci su dozvoljeni."
       />
     </div>
   );

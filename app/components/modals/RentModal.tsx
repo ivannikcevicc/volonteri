@@ -88,10 +88,6 @@ export const RentModal = () => {
     });
   };
 
-  // const onSubmit = (data: FieldValues) => {
-  //   console.log(data);
-  //   rentModal.onClose();
-  // };
 
   const onBack = () => {
     setStep((value) => value - 1);
@@ -117,7 +113,7 @@ export const RentModal = () => {
         jobTime: data.jobTime,
       })
       .then(() => {
-        toast.success("Listing created!");
+        toast.success("Posao kreiran!");
         router.refresh();
         reset();
 
@@ -125,7 +121,7 @@ export const RentModal = () => {
         rentModal.onClose();
       })
       .catch(() => {
-        toast.error("Something went wrong!");
+        toast.error("Greška!");
       })
       .finally(() => {
         setIsLoading(false);

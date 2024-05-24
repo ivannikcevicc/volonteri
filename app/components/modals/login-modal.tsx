@@ -46,7 +46,7 @@ export const LoginModal = () => {
         setIsLoading(false);
 
         if (callback?.ok) {
-          toast.success("Logged in successfully");
+          toast.success("Uspješna prijava");
           router.refresh();
           LoginModal.onClose();
         }

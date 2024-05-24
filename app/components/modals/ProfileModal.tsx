@@ -167,7 +167,7 @@ export const ProfileModal = ({ currentUser }: Props) => {
     console.log({ ...data, userId });
     setIsLoading(true);
     if (!currentUser) {
-      toast.error("Unauthorized");
+      toast.error("Niste prijavljeni");
       profileModal.onClose();
       return;
     }
@@ -178,16 +178,16 @@ export const ProfileModal = ({ currentUser }: Props) => {
         setIsLoading(false);
 
         if (response) {
-          toast.success("Logged in successfully");
+          toast.success("Promjene uspješno postavljene");
           router.refresh();
           profileModal.onClose();
         } else {
-          toast.error("Something went wrong!");
+          toast.error("Greška prilikom mijenjanja");
         }
       })
       .catch((error) => {
         setIsLoading(false);
-        toast.error("Something went wrong!");
+        toast.error("Greška prilikom ažuriranja");
         console.error("Error updating user:", error);
       });
   };
