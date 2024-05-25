@@ -19,20 +19,34 @@ interface Props {
   job: Job & {
     user: SafeUser;
   };
-  // job: any;
   currentUser: SafeUser | null;
-  applications: Application[]
-  // currentUser: any;
+  applications: Application[];
 }
 
 export const JobClient = ({ job, currentUser, applications }: Props) => {
   const applicationModal = useApplicationModal();
   const loginModal = useLoginModal();
-  // const [isLoading, setIsLoading] = useState(false);
+  const [applied, setApplied] = useState(false);
+  const [buttonLabel, setButtonLabel] = useState("Prijavi se");
 
   const category = useMemo(() => {
     return categories.find((item) => item.label === job.category);
   }, [job.category]);
+
+  useEffect(() => {
+    if (currentUser) {
+      const hasApplied = applications.some(
+        (application) => application.userId === currentUser.id
+      );
+      setApplied(hasApplied);
+      setButtonLabel("Već ste prijavljeni.");
+    }
+
+    if (currentUser && job.userId === currentUser.id) {
+      setApplied(true);
+      setButtonLabel("Vaša objava.");
+    }
+  }, [applications, currentUser, job.userId]);
 
   const locationValue = {
     cityName: job.cityName,
@@ -59,15 +73,19 @@ export const JobClient = ({ job, currentUser, applications }: Props) => {
               category={category}
               description={job.description}
               locationValue={locationValue}
+              required={job.required}
             />
             <div className="order-first mb-10 md:order-last md:col-span-3">
               <JobReservation
                 onSubmit={() => {
                   if (!currentUser) return loginModal.onOpen();
                   applicationModal.onOpen();
+                  setApplied(true);
                 }}
                 applications={applications}
-                // disabled={isLoading}
+                disabled={applied}
+                buttonLabel={buttonLabel}
+                peopleCount={job.peopleCount}
               />
             </div>
           </div>

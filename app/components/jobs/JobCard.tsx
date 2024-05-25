@@ -69,17 +69,20 @@ export const JobCard = ({
               currentUser={currentUser}
             ></HeartButton>
           </div>
+
+          <div className="absolute bottom-3 right-3">
+            {currentUser?.id === data.userId && (
+              <span className="py-[0rem] px-[.6rem] text-[.8rem] rounded-full bg-green-500 text-white">
+                Vaše
+              </span>
+            )}
+          </div>
         </div>
-        <div className="font-semibold text-lg">
-          {data.cityName}, {data.countryName}
+        <div className="font-semibold text-lg flex flex-row gap-2">
+          {data.title}{" "}
         </div>
         <div className="flex flex-row items-center gap-1">
-          aaaaaaaaaaa{" "}
-          {currentUser?.id === data.userId && (
-            <span className="py-[.15rem] px-[.6rem] text-[.8rem] rounded-full bg-green-500 text-white">
-              Vaše
-            </span>
-          )}
+          {data.cityName}, {data.countryName}{" "}
         </div>
         {secondaryAction && secondaryActionLabel && (
           <Button

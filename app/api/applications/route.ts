@@ -14,7 +14,18 @@ export async function POST(request: Request) {
   const { jobId, fileUrl, name, email, phoneNumber, expirience, about } = body;
 
   if (!jobId || !name || !email || !phoneNumber || !expirience) {
-    return NextResponse.error();
+    return NextResponse.json({ error: "Fale podaci." });
+  }
+
+  const existingApplication = await prismadb.application.findFirst({
+    where: {
+      jobId: jobId,
+      userId: currentUser.id,
+    },
+  });
+
+  if (existingApplication) {
+    return NextResponse.json({ error: "Veza je već prijavljena." });
   }
 
   const jobAndApplication = await prismadb.job.update({
