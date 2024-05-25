@@ -30,6 +30,13 @@ export async function POST(request: Request) {
     description,
   } = body;
 
+  if (required.length > 300 || description.length > 300) {
+    return NextResponse.json({
+      error:
+        "Opis ili obavezne informacije za prijavu su predugački (>300 znakova).",
+    });
+  }
+
   const job = await prismadb.job.create({
     data: {
       title,

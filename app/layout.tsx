@@ -15,6 +15,7 @@ import { ApplicationModal } from "./components/modals/ApplicationModal";
 import { EdgeStoreProvider } from "./libs/edgestore";
 import { InformationModal } from "./components/modals/InformationModal";
 import { ContactModal } from "./components/modals/ContactModal";
+import { ReviewModal } from "./components/modals/ReviewModal";
 const font = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -40,6 +41,7 @@ export default async function RootLayout({
             <ProfileModal currentUser={currentUser} />
             <ContactModal currentUser={currentUser} />
             <ToasterProvider />
+            <ReviewModal currentUser={currentUser} />
             <SearchModal />
             <RegisterModal />
             <ApplicationModal currentUser={currentUser} />

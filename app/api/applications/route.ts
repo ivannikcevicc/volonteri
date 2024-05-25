@@ -28,6 +28,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Veza je već prijavljena." });
   }
 
+  if (about.length > 300) {
+    return NextResponse.json({ error: "Opis je predugačak (>300 znakova)." });
+  }
+
   const jobAndApplication = await prismadb.job.update({
     where: {
       id: jobId,

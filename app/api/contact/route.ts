@@ -16,6 +16,12 @@ export async function POST(request: Request) {
     return NextResponse.error();
   }
 
+  if (message > 1000 || name.length > 30) {
+    return NextResponse.json({
+      error: "Opis ili ime predugačko (>1000 opis, >30 ime).",
+    });
+  }
+
   const resend = new Resend(`${process.env.RESEND_API_KEY}`);
 
   await resend.emails.send({

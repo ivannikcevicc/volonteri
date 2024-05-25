@@ -54,7 +54,10 @@ model Review {
 
   description String
   ratingNumber Int
+  userImg String
+  userName String
 
+  createdAt DateTime @default(now())
 
   job Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

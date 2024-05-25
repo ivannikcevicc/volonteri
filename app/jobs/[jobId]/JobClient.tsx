@@ -7,11 +7,10 @@ import { JobReservation } from "@/app/components/jobs/JobReservation";
 import { categories } from "@/app/components/navbar/Categories";
 import { useApplicationModal } from "@/app/hooks/useApplicationModal";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
-import { useRentModal } from "@/app/hooks/useRentModal";
 import { SafeUser } from "@/app/types";
-import { Application, Job } from "@prisma/client";
+import { Application, Job, Review } from "@prisma/client";
 import axios from "axios";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -19,12 +18,14 @@ interface Props {
   job: Job & {
     user: SafeUser;
   };
+  reviews: Review[];
   currentUser: SafeUser | null;
   applications: Application[];
 }
 
-export const JobClient = ({ job, currentUser, applications }: Props) => {
+export const JobClient = ({ job, currentUser, applications, reviews }: Props) => {
   const applicationModal = useApplicationModal();
+  const router = useRouter();
   const loginModal = useLoginModal();
   const [applied, setApplied] = useState(false);
   const [buttonLabel, setButtonLabel] = useState("Prijavi se");
@@ -84,6 +85,7 @@ export const JobClient = ({ job, currentUser, applications }: Props) => {
                 }}
                 applications={applications}
                 disabled={applied}
+                reviews={reviews}
                 buttonLabel={buttonLabel}
                 peopleCount={job.peopleCount}
               />
