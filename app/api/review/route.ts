@@ -52,3 +52,31 @@ export async function POST(request: Request) {
 
   return NextResponse.json(review);
 }
+
+export async function DELETE(request: Request) {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) {
+    return NextResponse.json({ error: "Not authorized." });
+  }
+
+  const body = await request.json();
+
+  const { userId, jobId } = body;
+
+  if (!userId || typeof userId !== "string") {
+    return NextResponse.json({ error: "invalid ID." });
+  }
+
+  if (userId !== currentUser.id) {
+    return NextResponse.json({ error: "Not authorized." });
+  }
+
+  const review = await prismadb.review.deleteMany({
+    where: {
+      userId: userId,
+      jobId: jobId,
+    },
+  });
+
+  return NextResponse.json(review);
+}

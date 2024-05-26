@@ -47,6 +47,11 @@ export const ReviewModal = ({
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
+    if (rating === 0) {
+      toast.error("Niste odabrali nijedan rezultat.");
+      setIsLoading(false);
+      return;
+    }
     axios
       .post("/api/review", {
         ...data,
@@ -67,6 +72,7 @@ export const ReviewModal = ({
       .finally(() => {
         setIsLoading(false);
         reviewModal.onClose();
+        setRating(0);
       });
   };
   let bodyContent = (

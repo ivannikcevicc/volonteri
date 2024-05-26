@@ -88,7 +88,6 @@ export const RentModal = () => {
     });
   };
 
-
   const onBack = () => {
     setStep((value) => value - 1);
   };
@@ -125,6 +124,7 @@ export const RentModal = () => {
       })
       .finally(() => {
         setIsLoading(false);
+        router.refresh();
       });
   };
 

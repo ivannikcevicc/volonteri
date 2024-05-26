@@ -18,6 +18,11 @@ import { ContactModal } from "./components/modals/ContactModal";
 import { ReviewModal } from "./components/modals/ReviewModal";
 const font = Nunito({ subsets: ["latin"] });
 
+import { register } from "swiper/element/bundle";
+// Import Swiper styles
+import "swiper/swiper-bundle.css";
+import "swiper/css/pagination";
+
 export const metadata: Metadata = {
   title: "Volonteri",
   description: "sajt za volontere",

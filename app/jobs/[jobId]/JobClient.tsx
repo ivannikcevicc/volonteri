@@ -23,11 +23,17 @@ interface Props {
   applications: Application[];
 }
 
-export const JobClient = ({ job, currentUser, applications, reviews }: Props) => {
+export const JobClient = ({
+  job,
+  currentUser,
+  applications,
+  reviews,
+}: Props) => {
   const applicationModal = useApplicationModal();
   const router = useRouter();
   const loginModal = useLoginModal();
   const [applied, setApplied] = useState(false);
+  const [reviewed, setReviewed] = useState(false);
   const [buttonLabel, setButtonLabel] = useState("Prijavi se");
 
   const category = useMemo(() => {
@@ -47,7 +53,14 @@ export const JobClient = ({ job, currentUser, applications, reviews }: Props) =>
       setApplied(true);
       setButtonLabel("Vaša objava.");
     }
-  }, [applications, currentUser, job.userId]);
+
+    if (currentUser) {
+      const hasReviewed = reviews.some(
+        (review) => review.userId === currentUser.id
+      );
+      setReviewed(hasReviewed);
+    }
+  }, [applications, currentUser, job.userId, reviews]);
 
   const locationValue = {
     cityName: job.cityName,
@@ -85,6 +98,9 @@ export const JobClient = ({ job, currentUser, applications, reviews }: Props) =>
                 }}
                 applications={applications}
                 disabled={applied}
+                reviewed={reviewed}
+                jobId={job.id}
+                currentUser={currentUser}
                 reviews={reviews}
                 buttonLabel={buttonLabel}
                 peopleCount={job.peopleCount}
