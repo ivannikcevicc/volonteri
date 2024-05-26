@@ -16,8 +16,8 @@ const MyApplicationsPage = async () => {
   if (applications.length === 0) {
     return (
       <EmptyState
-        title="No trips found"
-        subtitle="Looks like you haven't made any trips yet"
+        title="Nema prijava"
+        subtitle="Izgleda da se nigdje niste prijavljivali."
       ></EmptyState>
     );
   }

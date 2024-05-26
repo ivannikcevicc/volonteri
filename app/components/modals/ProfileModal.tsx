@@ -227,8 +227,8 @@ export const ProfileModal = ({ currentUser }: Props) => {
     <Modal
       disabled={isLoading}
       isOpen={profileModal.isOpen}
-      title="Edit profile"
-      actionLabel="Update Profile"
+      title="Izmjena profila"
+      actionLabel="Ažuriraj profil"
       onClose={profileModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}

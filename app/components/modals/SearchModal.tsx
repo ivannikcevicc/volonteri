@@ -64,16 +64,16 @@ const SearchModal = () => {
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.LOCATION) {
-      return "Search";
+      return "Pretraži";
     }
-    return "Next";
+    return "Dalje";
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
     if (step === STEPS.LOCATION) {
       return undefined;
     }
-    return "Back";
+    return "Nazad";
   }, [step]);
 
   let center: any = undefined;
@@ -85,8 +85,8 @@ const SearchModal = () => {
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
-        title="Where do you wanna go?"
-        subtitle={"Find the perfect location"}
+        title="Pretražite po lokaciji"
+        subtitle={"Odaberite odgovarajuću lokaciju"}
       />
       <CountrySelect
         value={location}
@@ -102,7 +102,7 @@ const SearchModal = () => {
       isOpen={searchModal.isOpen}
       onClose={searchModal.onClose}
       onSubmit={onSubmit}
-      title="Filters"
+      title="Pretraga"
       actionLabel={actionLabel}
       secondaryAction={step === STEPS.LOCATION ? undefined : onBack}
       secondaryActionLabel={secondaryActionLabel}

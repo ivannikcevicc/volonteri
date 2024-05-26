@@ -25,7 +25,7 @@ const ApplicationsPage = async () => {
     return (
       <EmptyState
         title="Nema prijava."
-        subtitle="Izgleda da se nigdje niste prijavili."
+        subtitle="Izgleda da se niko nije prijavljivao na vaše poslove."
       />
     );
   }

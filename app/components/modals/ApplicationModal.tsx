@@ -89,7 +89,7 @@ export const ApplicationModal = ({
         applicationModal.onClose();
       })
       .catch(() => {
-        toast.error("Something went wrong!");
+        toast.error("Greška prilikom prijave");
       })
       .finally(() => {
         setIsLoading(false);
@@ -98,17 +98,17 @@ export const ApplicationModal = ({
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.CV) {
-      return "Create";
+      return "Kreiraj";
     }
 
-    return "Next";
+    return "Dalje";
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
     if (step === STEPS.CREDS) {
       return undefined;
     }
-    return "Back";
+    return "Nazad";
   }, [step]);
 
   let bodyContent = (
@@ -240,7 +240,7 @@ export const ApplicationModal = ({
       onClose={applicationModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       isOpen={applicationModal.isOpen}
-      title="Post your Job!"
+      title="Prijava"
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CV ? undefined : onBack}

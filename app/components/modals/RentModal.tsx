@@ -130,17 +130,17 @@ export const RentModal = () => {
 
   const actionLabel = useMemo(() => {
     if (step === STEPS.DESCRIPTION) {
-      return "Create";
+      return "Kreiraj";
     }
 
-    return "Next";
+    return "Dalje";
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
     if (step === STEPS.CATEGORY) {
       return undefined;
     }
-    return "Back";
+    return "Nazad";
   }, [step]);
 
   let bodyContent = (
@@ -173,8 +173,8 @@ export const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Where is your place located?"
-          subtitle="Help guests find you!"
+          title="Gdje je posao baziran?"
+          subtitle="Pomozite volonterima da vas pronadju!"
         />
         <CountrySelect
           value={location}
@@ -377,7 +377,7 @@ export const RentModal = () => {
       onSubmit={handleSubmit(onSubmit)}
       isOpen={rentModal.isOpen}
       disabled={isLoading}
-      title="Post your Job!"
+      title="Objavite posao!"
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}

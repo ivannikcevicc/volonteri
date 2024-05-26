@@ -41,12 +41,17 @@ export const JobClient = ({
   }, [job.category]);
 
   useEffect(() => {
+    setApplied(false);
+    setButtonLabel("Prijavi se");
+    setReviewed(false);
     if (currentUser) {
       const hasApplied = applications.some(
         (application) => application.userId === currentUser.id
       );
       setApplied(hasApplied);
-      setButtonLabel("Već ste prijavljeni.");
+      if (hasApplied) {
+        setButtonLabel("Već ste prijavljeni.");
+      }
     }
 
     if (currentUser && job.userId === currentUser.id) {

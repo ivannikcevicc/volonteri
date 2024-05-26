@@ -78,7 +78,7 @@ export const LoginModal = () => {
       <Input
         id="password"
         type="password"
-        label="Password"
+        label="Šifra"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -95,24 +95,24 @@ export const LoginModal = () => {
       <hr />
       <Button
         outline
-        label="Continue with Google"
+        label="Nastavite sa Google-om"
         onClick={() => auth.signIn("google")}
         icon={FcGoogle}
       ></Button>
       <Button
         outline
-        label="Continue with Github"
+        label="Nastavite sa Github-om"
         onClick={() => auth.signIn("github")}
         icon={AiFillGithub}
       ></Button>
       <div className="text-neutral-600 text-center mt-4 font-light">
         <div className="justify-center flex flex-row items-center gap-2">
-          <div>First time using Airbnb?</div>
+          <div>Prvi put da koristite Volontere?</div>
           <div
             onClick={toggle}
             className="font-semibold text-neutral-800 cursor-pointer hover:underline"
           >
-            Create an account
+            Kreirajte nalog
           </div>
         </div>
       </div>
@@ -122,8 +122,8 @@ export const LoginModal = () => {
     <Modal
       disabled={isLoading}
       isOpen={LoginModal.isOpen}
-      title="Login"
-      actionLabel="Continue"
+      title="Prijava"
+      actionLabel="Nastavi"
       onClose={LoginModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}

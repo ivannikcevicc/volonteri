@@ -67,7 +67,7 @@ export const ReviewModal = ({
         console.log(data);
       })
       .catch(() => {
-        toast.error("Something went wrong!");
+        toast.error("Greška prilikom slanja recenzije");
       })
       .finally(() => {
         setIsLoading(false);

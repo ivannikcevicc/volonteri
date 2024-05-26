@@ -15,6 +15,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { SafeUser } from "@/app/types";
+import { Heading } from "../heading";
 
 interface Props {
   onSubmit: () => void;
@@ -94,51 +95,58 @@ export const JobReservation = ({
       </div>
       <hr />
       <div className="p-4">
-        <Button
-          disabled={disabled}
-          label={`${buttonLabel}`}
-          onClick={onSubmit}
-        />
+        <Button disabled={disabled} label={buttonLabel} onClick={onSubmit} />
       </div>
       <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
         {applications.length} Prijava/e
       </div>
-      <Swiper
-        modules={[Navigation, Pagination]}
-        spaceBetween={50}
-        slidesPerView={1}
-        navigation
-        loop={true}
-        autoplay={true}
-        pagination={{ clickable: true }}
-      >
-        {reviews.map((review) => (
-          <SwiperSlide key={review.id} className="">
-            <div className="border-[1px] border-neutral-200 p-4 ">
-              <div className="flex flex-row items-center gap-2 mb-2">
-                <Avatar src={review.userImg} height={"30"} width={"30"} />{" "}
-                {review.userName}
-              </div>
-              <div className="flex flex-row items-center gap-2">
-                {[1, 2, 3, 4, 5].map((value) => (
-                  <IoStar
-                    key={value}
-                    color={value <= review.ratingNumber ? "orange" : "black"}
-                    size={24}
-                  />
-                ))}
-              </div>
-              <div className="font-semibold text-lg mt-3">
-                &quot;{review.description}&quot;
-              </div>
 
-              <div className="font-light text-md mt-1">
-                - Posted: {formatDate(review.createdAt)}
+      {reviews.length > 0 ? (
+        <Swiper
+          modules={[Navigation, Pagination]}
+          spaceBetween={50}
+          slidesPerView={1}
+          navigation
+          loop={true}
+          autoplay={true}
+          pagination={{ clickable: true }}
+        >
+          {reviews.map((review) => (
+            <SwiperSlide key={review.id} className="">
+              <div className="border-[1px] border-neutral-200 p-4 ">
+                <div className="flex flex-row items-center gap-2 mb-2">
+                  <Avatar src={review.userImg} height={"30"} width={"30"} />{" "}
+                  {review.userName}
+                </div>
+                <div className="flex flex-row items-center gap-2">
+                  {[1, 2, 3, 4, 5].map((value) => (
+                    <IoStar
+                      key={value}
+                      color={value <= review.ratingNumber ? "orange" : "black"}
+                      size={24}
+                    />
+                  ))}
+                </div>
+                <div className="font-semibold text-lg mt-3">
+                  &quot;{review.description}&quot;
+                </div>
+
+                <div className="font-light text-md mt-1">
+                  - Posted: {formatDate(review.createdAt)}
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        <div className="flex flex-col gap-8">
+          <Heading
+            title="Ne postoje recenzije"
+            subtitle="Ne postoje recenzije za ovaj posao."
+          />
+        </div>
+      )}
+
       <Button
         disabled={isLoading}
         label={reviewed ? "Ukloni recenziju" : "Napiši recenziju"}

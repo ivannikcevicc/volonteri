@@ -70,7 +70,7 @@ export const RegisterModal = () => {
       />
       <Input
         id="name"
-        label="Name"
+        label="Ime"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -82,7 +82,7 @@ export const RegisterModal = () => {
       <Input
         id="password"
         type="password"
-        label="Password"
+        label="Šifra"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -99,24 +99,24 @@ export const RegisterModal = () => {
       <hr />
       <Button
         outline
-        label="Continue with Google"
+        label="Nastavite sa Google-om"
         onClick={() => signIn("google")}
         icon={FcGoogle}
       ></Button>
       <Button
         outline
-        label="Continue with Github"
+        label="Nastavite sa Github-om"
         onClick={() => signIn("github")}
         icon={AiFillGithub}
       ></Button>
       <div className="text-neutral-600 text-center mt-4 font-light">
         <div className="justify-center flex flex-row items-center gap-2">
-          <div>Already have an account?</div>
+          <div>Već imate nalog?</div>
           <div
             onClick={toggle}
             className="font-semibold text-neutral-800 cursor-pointer hover:underline"
           >
-            Log in
+            Prijava
           </div>
         </div>
       </div>
@@ -126,8 +126,8 @@ export const RegisterModal = () => {
     <Modal
       disabled={isLoading}
       isOpen={registerModal.isOpen}
-      title="Register"
-      actionLabel="Continue"
+      title="Registracija"
+      actionLabel="Nastavi"
       onClose={registerModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
