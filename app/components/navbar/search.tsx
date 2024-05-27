@@ -17,7 +17,7 @@ export const Search = () => {
       return `${cityName}`;
     }
 
-    return "Anywhere";
+    return "Bilo Gdje";
   }, [cityName]);
 
   return (

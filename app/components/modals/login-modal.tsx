@@ -63,7 +63,7 @@ export const LoginModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Welcome back" subtitle="Log in to your account!" />
+      <Heading title="Dobrodošli!" subtitle="Prijavite se na Vaš nalog" />
       <Input
         id="email"
         label="Email"
