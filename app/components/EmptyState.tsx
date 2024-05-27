@@ -24,7 +24,7 @@ export const EmptyState = ({
         {showReset && (
           <Button
             outline
-            label="Remove all filters"
+            label="Ukloni filtere"
             onClick={() => {
               router.push("/");
             }}

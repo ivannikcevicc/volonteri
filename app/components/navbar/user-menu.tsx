@@ -50,7 +50,7 @@ export const UserMenu = ({ currentUser }: Props) => {
             }
           }}
         >
-          {currentUser ? currentUser.name : "Log in"}
+          {currentUser ? currentUser.name : "Prijavi se"}
         </div>
         <div
           onClick={toggleOpen}
