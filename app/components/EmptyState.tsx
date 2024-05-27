@@ -11,8 +11,8 @@ interface Props {
 }
 
 export const EmptyState = ({
-  title = "No exact matches.",
-  subtitle = "Try changing or removing some of your filters.",
+  title = "Nema rezultata.",
+  subtitle = "Pokušajte da promijenite uslove filtera.",
   showReset,
 }: Props) => {
   const router = useRouter();
